@@ -8,7 +8,7 @@ public class AddGame {
 		Scanner scan = new Scanner(System.in);
 		int a, b, dab=0, count=0;
 		
-		//새 문제 출제
+		//새 문제 생성 루프
 		for(int i=1; i<6; i++) {
 			
 			//난수 생성
