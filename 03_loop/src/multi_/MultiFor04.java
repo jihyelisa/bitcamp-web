@@ -4,21 +4,53 @@ public class MultiFor04 {
 
 	public static void main(String[] args) {
 		
-		int count=0, dan=2;
 		
-		for(; dan<=9; count+=3) {
+		//내가 쓴 코드
+//		int count=0, dan=2;
+//		
+//		for(; dan<=9; count+=3) {
+//			
+//			for(int num=1; num<10; num++) {
+//				
+//				for(dan=2+count; dan<5+count; dan++) {
+//					
+//					if(dan>9) break;
+//					System.out.print(dan + "*" + num + "=" + dan*num + "\t");
+//				} System.out.println();
+//			} System.out.println();
+//		}
+		
+		
+		//선생님 코드
+		int dan, i;
+		for(int w=2; w<=8; w+=3) {
 			
-			for(int num=1; num<10; num++) {
+			for(i=1; i<=9; i++) {
 				
-				for(dan=2+count; dan<5+count; dan++) {
+				for(dan=w; dan<=w+2; dan++) {
 					
-					if(dan>9) break;
-					System.out.print(dan + "*" + num + "=" + dan*num + "\t");
-				} System.out.println();
-			} System.out.println();
+					if(dan!=10) System.out.print(dan + "*" + i + "=" + dan*i + "\t");
+				}
+				System.out.println();
+			}
+			System.out.println();
 		}
+		
+		
+		
+		
+		
 	}
 }
+
+
+
+
+
+
+
+
+
 
 /*
 3중 for문 사용하세요 (3중 for, if)

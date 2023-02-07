@@ -8,33 +8,63 @@ public class Array05 {
 		int[] count = new int[26];
 		
 		
-		//count 배열 모든 번호에 0 입력
-		for(int i=0; i<26; i++) count[i] = 0;
+		//내가 쓴 코드
+//		//count 배열 모든 번호에 0 입력
+//		for(int i=0; i<26; i++) count[i] = 0;
+//		
+//		
+//		//다섯 줄 반복
+//		for(int j=0; j<5; j++) {
+//			
+//			//한 줄 생성
+//			for(int i=j*10; i<j*10+10; i++) {
+//				
+//				//배열에 랜덤한 문자 저장, 출력
+//				char alpha = (char)(Math.random()*(90-65+1) + 65);
+//				ar[i] = alpha;
+//				System.out.print(ar[i] + " ");
+//				
+//				//알파벳에 해당하는 count 인덱스의 데이터값 1 증가
+//				count[(int)alpha-65]++;
+//			}
+//			System.out.println();
+//		}
+//		System.out.println();
+//		
+//		
+//		//알파벳별 개수 출력
+//		for(int i=0; i<26; i++) {
+//			System.out.println((char)(i+65) + ": " + count[i]);
+//		}
 		
 		
-		//다섯 줄 반복
-		for(int j=0; j<5; j++) {
+		
+		//선생님 코드
+		
+		for(int i=0; i<ar.length; i++) {
+			ar[i] = (char)(Math.random() * 26 + 65);
 			
-			//한 줄 생성
-			for(int i=j*10; i<j*10+10; i++) {
-				
-				//배열에 랜덤한 문자 저장, 출력
-				char alpha = (char)(Math.random()*(90-65+1) + 65);
-				ar[i] = alpha;
-				System.out.print(ar[i] + " ");
-				
-				//알파벳에 해당하는 count 인덱스의 데이터값 1 증가
-				count[(int)alpha-65]++;
+			for(int j=0; j<count.length; j++) {
+				if(ar[i] == 65+j) count[j]++;
 			}
-			System.out.println();
 		}
+		
+		//알파벳 출력
+		for(int i=0; i<ar.length; i++) {
+			System.out.print(ar[i] + " ");
+			if((i+1)%10 == 0) System.out.println();
+		}
+		
+		//개수 출력
 		System.out.println();
-		
-		
-		//알파벳별 개수 출력
-		for(int i=0; i<26; i++) {
-			System.out.println((char)(i+65) + ": " + count[i]);
+		for(int i=0; i<count.length; i++) {
+			System.out.print((char)(i+65) + " : " + count[i] + "\t");
+			if((i+1)%5 == 0) System.out.println();
 		}
+		
+		
+		
+		
 	}
 }
 
