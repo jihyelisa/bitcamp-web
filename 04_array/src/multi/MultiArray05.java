@@ -8,33 +8,63 @@ public class MultiArray05 {
 		Scanner scan = new Scanner(System.in);
 		
 		//자료형별 배열 선언
-		
 		System.out.print("인원수: ");
 		int cnt = scan.nextInt();
-		String[][] name = new String[cnt][];
-		int[][] subject = new int[cnt][];
-		
-		
-		
-		
+		String[] name = new String[cnt];
+		String[][] subject = new String[cnt][];
+		int[][] jumsu = new int[cnt][];
+
 		//인원수만큼 전체 입력 반복
 		for(int i=0; i<cnt; i++) {
 			
 			System.out.print("이름 입력: ");
-			name[i][0] = scan.next();
+			name[i] = scan.next();
 			
+			//가변 길이 배열을 포함하는 2차원 배열
 			System.out.print("과목수 입력: ");
 			int subjectCnt = scan.nextInt();
-			subject[i] = new int[subjectCnt];
-		}
-		
-		
-		ar[0] = new int[2];
-		ar[1] = new int[3];
-		ar[2] = new int[4];
+			subject[i] = new String[subjectCnt];
+			jumsu[i] = new int[subjectCnt];
+			
+			//과목 수만큼 과목명 입력 반복
+			for(int j=0; j<subjectCnt; j++) {
+				System.out.print("과목명 입력: ");
+				subject[i][j] = scan.next();
+			}
 
-		ar[0][0] = 10;
-		ar[0][1] = 20;
+			//과목 수만큼 점수 입력 반복
+			for(int j=0; j<subjectCnt; j++) {
+				System.out.print(subject[i][j] + " 점수 입력: ");
+				jumsu[i][j] = scan.nextInt();
+			}
+			System.out.println("---------------------");
+		} //for i
+		
+		
+		
+		//인원수만큼 성적표 전체 출력 반복
+		for(int i=0; i<name.length; i++) {
+			//총점, 평균 변수 선언
+			int tot=0;
+			String avg;
+			
+			//인덱스
+			System.out.print("이름\t");
+			for(int j=0; j<subject[i].length; j++) {
+				System.out.print(subject[i][j] + "\t");
+			}
+			System.out.print("총점\t평균");
+			
+			//내용
+			System.out.print("\n" + name[i] + "\t");
+			for(int j=0; j<subject[i].length; j++) {
+				System.out.print(jumsu[i][j] + "\t");
+				tot += jumsu[i][j]; //총점 계산
+			} //for j
+			avg = String.format("%.2f", (double)tot / subject[i].length);
+			
+			System.out.print(tot + "\t" + avg + "\n\n");
+		} //for i
 	}
 }
 
