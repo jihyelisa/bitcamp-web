@@ -48,7 +48,7 @@ public class Baseball {
 				user[1] = num / 10 % 10;
 				user[2] = num % 10;
 				
-//				//temp 코드 점검 시 정답 확인
+//				//코드 점검 시 정답 확인
 //				for(int data : com) System.out.print(data);
 //				System.out.println();
 //				for(int data : user) System.out.print(data);
@@ -67,16 +67,8 @@ public class Baseball {
 			} //while(strike<3)
 			System.out.println("***3 STRIKES!***");
 		} //if(game=="y")
-		
 		System.out.println("프로그램을 종료합니다.");
-		
-
-	
-	
-	
-	
 	}
-
 }
 
 
