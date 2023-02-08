@@ -9,7 +9,7 @@ public class MultiArray03 {
 		double[] arg = new double[3];
 		char[] grade = new char[3];
 		
-		//총점		
+		//총점 계산
 		for(int j=0; j<jumsu.length; j++) {
 			for(int i=0; i<3; i++) {
 			jumsu[j][3] += jumsu[j][i];
@@ -17,10 +17,10 @@ public class MultiArray03 {
 		}
 
 		for(int i=0; i<arg.length; i++) {
-			//평균	
+			//평균 계산
 			arg[i] = jumsu[i][3] / 3.0;
 			
-			//학점
+			//학점 계산
 			if(arg[i]>=90) grade[i] = 'A';
 			else if(arg[i]>=80) grade[i] = 'B';
 			else if(arg[i]>=70) grade[i] = 'C';

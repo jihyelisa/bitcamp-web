@@ -44,6 +44,7 @@ public class Baseball {
 				//유저 숫자 입력 받기
 				System.out.print("\n숫자 입력: ");
 				int num = scan.nextInt();
+				//charAt() 함수 이용하는 방법도 있음
 				user[0] = num / 100;
 				user[1] = num / 10 % 10;
 				user[2] = num % 10;
@@ -63,7 +64,6 @@ public class Baseball {
 				
 				//정답 출력
 				System.out.println(strike + " strike & " + ball + " ball");
-				
 			} //while(strike<3)
 			System.out.println("***3 STRIKES!***");
 		} //if(game=="y")
