@@ -20,7 +20,7 @@ public class MultiArray05 {
 			System.out.print("이름 입력: ");
 			name[i] = scan.next();
 			
-			//가변 길이 배열을 포함하는 2차원 배열
+			//가변 길이 배열을 포함하는 다차원 배열
 			System.out.print("과목수 입력: ");
 			int subjectCnt = scan.nextInt();
 			subject[i] = new String[subjectCnt];
@@ -61,8 +61,7 @@ public class MultiArray05 {
 				System.out.print(jumsu[i][j] + "\t");
 				tot += jumsu[i][j]; //총점 계산
 			} //for j
-			avg = String.format("%.2f", (double)tot / subject[i].length);
-			
+			avg = String.format("%.2f", (double)tot / subject[i].length); //평균 계산
 			System.out.print(tot + "\t" + avg + "\n\n");
 		} //for i
 	}
