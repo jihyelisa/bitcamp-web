@@ -6,15 +6,29 @@ public class ExamMain {
 	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("인원수 입력: ");
+		System.out.print("How many people?: ");
 		int cnt = scan.nextInt();
 		
-		//객체배열 사용
+		
+		//객체배열 생성
 		Exam[] arr = new Exam[cnt];
+		
 		for(int i=0; i<cnt; i++) {
 			arr[i] = new Exam();
-			arr[i].
+			arr[i].compare();
 		}
+		
+		
+		//출력
+		System.out.print("\n이름\t1 2 3 4 5\t점수");
+		
+		for(int j=0; j<arr.length; j++) {
+			System.out.println();
+			arr[j].getName();
+			arr[j].getOx();
+			arr[j].getScore();
+		}
+		
 	}
 
 }
