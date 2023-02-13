@@ -5,20 +5,16 @@ import java.util.Scanner;
 public class Exam {
 	Scanner scan = new Scanner(System.in);
 	
-	private String name = null;
-	private String dap = null;
-	private char[] ox = null;
-	private int score = 0;
-<<<<<<< HEAD
-	private final String JUNG = "11111"; //상수화
-	
-	public void compare() {
-		
-	}
-	
-=======
+	private String name;
+	private String dap;
+	private char[] ox = new char[5];
+	private int score;
+	//상수화, 바꾸지 않을 값
+	//필드명을 대문자로 정한다.
 	private final String JUNG = "11111";
 	
+	
+	//Insert name & answer
 	public Exam() {
 		System.out.print("\nYour name: ");
 		name = scan.next();
@@ -26,9 +22,9 @@ public class Exam {
 		dap = scan.next();
 	}
 	
+	
+	//Compare the answers
 	public void compare() {
-		ox = new char[5];
-		
 		for(int i=0; i<5; i++) {
 			if(dap.charAt(i) == JUNG.charAt(i)) {
 				ox[i] = 'O';
@@ -38,20 +34,19 @@ public class Exam {
 		} //for i
 	}
 
+	
+	//get methods
 	public void getName() {
 		System.out.print(name + "\t");
 	}
 	public void getOx() {
 		for(int j=0; j<dap.length(); j++) {
 			System.out.print(ox[j] + " ");
-		}
+		} //for j
 	}
-	
 	public void getScore() {
 		System.out.print("\t" + score);
 	}
->>>>>>> 259ff21732b6d5f0a7240d5a991c122431d7849a
-
 }
 
 

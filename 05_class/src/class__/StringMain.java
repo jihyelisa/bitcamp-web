@@ -41,8 +41,5 @@ public class StringMain {
 		System.out.println("문자열 검색 = " + e.indexOf("바부")); //-1
 		
 		System.out.println("문자열 치환 = " + e.replace("날짜", "일자"));
-		
-		
 	}
-
 }

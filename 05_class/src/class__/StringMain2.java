@@ -1,11 +1,56 @@
 package class__;
 
+import java.util.Scanner;
+
 public class StringMain2 {
 	
 	public static void main(String[] args) {
 		
+		Scanner scan = new Scanner(System.in);
+		
+		//Insert String
+		System.out.print("문자열 입력: ");
+		String origin = scan.next();
+		System.out.print("현재 문자열 입력: ");
+		String current = scan.next();
+		System.out.print("바꿀 문자열 입력: ");
+		String change = scan.next();
+		
+		//String 길이 잘못 입력 시 함수 종료
+		if(origin.length() < current.length()) {
+			System.out.println("입력한 문자열의 크기가 작습니다.");
+			System.out.println("치환할 수 없습니다.");
+			return;
+//			System.exit(0); //프로그램 강제 종료 명령
+		}
+		
+		origin = origin.toLowerCase();
+		current = current.toLowerCase();
+		
+		
+		//내가 쓴 코드 - index가 증가하지 않음
+//		while(true) {
+//			int index = origin.indexOf(current);
+//			int index_end = index + current.length();
+//			origin.indexOf(current, index_end);
+//			
+//			//origin 끝까지 찾으면 break
+//			if(index_end >= origin.length()) break;
+//		} //while
+		
+		
+		//선생님 코드
+		int index = 0;
+		int count = 0;
+		
+		//indexOf 찾는 게 없으면 -1 반환
+		while((index = origin.indexOf(current, index)) != -1) {
+			count++;
+			index += current.length();
+		} //while
+		System.out.println(origin.replace(current, change));
+		System.out.println(count + "번 치환했습니다.");
 	}
-
 }
 
 

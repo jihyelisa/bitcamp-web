@@ -22,11 +22,12 @@ public class ExamMain {
 		//출력
 		System.out.print("\n이름\t1 2 3 4 5\t점수");
 		
-		for(int j=0; j<arr.length; j++) {
+//		for(int j=0; j<arr.length; j++) {
+		for(Exam e : arr) { //확장형 for문 사용하기
 			System.out.println();
-			arr[j].getName();
-			arr[j].getOx();
-			arr[j].getScore();
+			e.getName();
+			e.getOx();
+			e.getScore();
 		}
 		
 	}
