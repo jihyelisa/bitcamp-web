@@ -13,7 +13,7 @@ class CalendarEx {
 	int firstDay, lastDay;
 	
 	public CalendarEx() {
-		System.out.print("년도 입력: ");
+		System.out.print("연도 입력: ");
 		year = scan.next();
 		System.out.print("월 입력: ");
 		month = scan.next();
