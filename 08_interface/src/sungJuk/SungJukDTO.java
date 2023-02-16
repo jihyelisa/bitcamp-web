@@ -1,6 +1,6 @@
 package sungJuk;
 
-public class SungJukDTO {
+public class SungJukDTO implements Comparable<SungJukDTO> {
 	
 	private int no;
 	private String name;
@@ -13,7 +13,6 @@ public class SungJukDTO {
 		this.kor = kor;
 		this.eng = eng;
 		this.math = math;
-		
 	}
 	
 	public void calc() {
@@ -28,48 +27,50 @@ public class SungJukDTO {
 				+ "\t" + total +"\t" + avg);
 	}
 	
+	@Override
+	//total 기준으로 내림차순
+	public int compareTo(SungJukDTO dto) {
+		if(this.total > dto.total) return -1; //오른쪽이 크면 -1
+		else if(this.total < dto.total) return 1;
+		else return 0;
+	}
+	
 	public int getNo() {
 		return no;
 	}
 	public void setNo(int no) {
 		this.no = no;
 	}
-
 	public int getKor() {
 		return kor;
 	}
 	public void setKor(int kor) {
 		this.kor = kor;
 	}
-
 	public int getEng() {
 		return eng;
 	}
 	public void setEng(int eng) {
 		this.eng = eng;
 	}
-
 	public int getMath() {
 		return math;
 	}
 	public void setMath(int math) {
 		this.math = math;
 	}
-
 	public int getTotal() {
 		return total;
 	}
 	public void setTotal(int total) {
 		this.total = total;
 	}
-
 	public double getAvg() {
 		return avg;
 	}
 	public void setAvg(double avg) {
 		this.avg = avg;
 	}
-
 	public String getName() {
 		return name;
 	}

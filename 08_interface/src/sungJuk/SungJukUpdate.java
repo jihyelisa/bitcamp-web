@@ -29,7 +29,7 @@ public class SungJukUpdate implements SungJuk {
 				arrayList.get(i).setEng(scan.nextInt());
 				System.out.print("New Math score to change: ");
 				arrayList.get(i).setMath(scan.nextInt());
-				System.out.println("Data updated..");
+				System.out.println("Data successfully updated.");
 				
 				//다시 계산
 				arrayList.get(i).calc(); //내 코드에서 빼먹은 부분!!
