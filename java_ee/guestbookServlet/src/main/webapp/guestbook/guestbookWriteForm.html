@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My Guestbook</title>
+
+<style>
+body {
+	margin:50px;
+	}
+input {
+	width:200px;
+	}
+textarea {
+	width:400px;
+	height:200px;
+	}
+.button {
+	width:100px;
+	}
+</style>
+
+</head>
+
+<body>
+
+<h3><i>Leave Your Message Here</i></h3>
+
+<form name="guestbookWriteForm" method="post" action="http://localhost:8080/guestbookServlet/GuestbookWriteServlet">
+
+	<table border="1" cellpadding="10" cellspacing="0">
+		<tr>
+			<th>이름</th>
+			<td>
+				<input type="text" name="name" placeholder="작성자 입력">
+				<div id="nameDiv"></div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>이메일</th>
+			<td>
+				<input type="text" name="email" placeholder="이메일 입력">
+				<div id="emailDiv"></div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>홈페이지</th>
+			<td>
+				<input type="text" name="homepage" value="http://">
+				<div id="homepageDiv"></div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>제목</th>
+			<td>
+				<input type="text" name="subject" placeholder="제목 입력">
+				<div id="subjectDiv"></div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>내용</th>
+			<td>
+				<textarea name="content"></textarea>
+				<div id="contentDiv"></div>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" align="center">
+				<input type='button' value="작성완료" onclick="checkGuestbook()" class="button">
+				<input type="reset" value="다시작성" name="reset" class="button">
+				<input type="button" value="목록보기" onclick="location.href='http://localhost:8080/guestbookServlet/guestbookList.html'" class="button">
+			</td>
+		</tr>
+	</table>
+</form>
+
+<script type="text/javascript">
+function checkGuestbook() {
+	document.getElementById("subjectDiv").innerText = "";
+	document.getElementById("contentDiv").innerText = "";
+
+	if (document.guestbookWriteForm.subject.value == "") {
+		document.getElementById("subjectDiv").innerText = "제목을 입력하세요";
+	} else if (document.guestbookWriteForm.content.value == "") {
+		document.getElementById("contentDiv").innerText = "내용을 입력하세요";
+	} else {
+		document.guestbookWriteForm.submit();
+	}
+}
+</script>
+
+</body>
+</html>
