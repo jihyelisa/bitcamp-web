@@ -3,9 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Search For Your Message</title>
+
+<style>
+body {
+	margin:50px;
+	}
+input {
+	margin-left:8px;
+	}
+</style>
 </head>
 
 <body>
-
+	<h3>Insert the index number.</h3>
+	
+	<form name="loginForm" method="post" action="/guestbookServlet/GuestbookSearchServlet">
+		<table>
+			<tr>
+				<th>글 번호 입력</th>
+				<td>
+					<input type="text" name="seq" id="seq">
+					<input type="submit" value="검색">
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>
