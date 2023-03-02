@@ -7,6 +7,7 @@ public class GuestbookDTO {
 	private String homepage;
 	private String subject;
 	private String content;
+	private String logtime=null;
 	
 	public String getName() {
 		return name;
@@ -37,5 +38,11 @@ public class GuestbookDTO {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getLogtime() {
+		return logtime;
+	}
+	public void setLogtime(String logtime) {
+		this.logtime = logtime;
 	}
 }

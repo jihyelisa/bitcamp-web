@@ -33,15 +33,15 @@ public class GuestbookDAO {
 		}
 	}
 	
-//	private static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
-//		try {
-//			if(rs != null) pstmt.close();
-//			if(pstmt != null) conn.close();
-//			if(conn != null) pstmt.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	private static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
+		try {
+			if(rs != null) pstmt.close();
+			if(pstmt != null) conn.close();
+			if(conn != null) pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public GuestbookDAO() { //생성자로 driver loading
 		try {
@@ -89,32 +89,36 @@ public class GuestbookDAO {
 			//close를 static 함수로 선언해서 new 할 필요 없게 함
 		} return su;
 	}
-	
-//	public boolean memberCheck(String id, String pwd) {
-//		boolean isMember = false;
-//		String sql = "SELECT ID, PWD FROM MEMBER";
-//		
-//		//생성자 안에 접속 코드를 작성하면 단 한 번만 접속 가능하게 됨
-//		this.getConnection();
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			rs = pstmt.executeQuery(); //테이블 형태로 결과 반환
-//			
-//			while(rs.next()) {
-//				if(rs.getString("ID").equals(id) && rs.getString("PWD").equals(pwd)) {
-//						isMember=true;
-//						break;
-//				} //if
-//			} //while
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			
-//		} finally {
-//			MemberDAO.close(conn, pstmt, rs);
-//			//close를 static 함수로 선언해서 new 할 필요 없게 함
-//		}
-//		return isMember;
-//	}
+
+	public GuestbookDTO guestbookSearch(String seq) {
+		GuestbookDTO guestbookDTO = new GuestbookDTO();
+		String sql = "SELECT * FROM GUESTBOOK WHERE SEQ=?";
+		
+		//생성자 안에 접속 코드를 작성하면 단 한 번만 접속 가능하게 됨
+		this.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, seq);
+			rs = pstmt.executeQuery(); //테이블 형태로 결과 반환
+			
+			while(rs.next()) {
+				if(rs.getString("SEQ").equals(seq)) {
+					guestbookDTO.setName(rs.getString("NAME"));
+					guestbookDTO.setEmail(rs.getString("EMAIL"));
+					guestbookDTO.setHomepage(rs.getString("HOMEPAGE"));
+					guestbookDTO.setSubject(rs.getString("SUBJECT"));
+					guestbookDTO.setContent(rs.getString("CONTENT"));
+					guestbookDTO.setLogtime(rs.getString("LOGTIME"));
+				} //if
+			} //while
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			GuestbookDAO.close(conn, pstmt, rs);
+		}
+		return guestbookDTO;
+	}
 }

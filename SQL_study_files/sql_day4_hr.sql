@@ -1,54 +1,37 @@
--- 테이블 복사
-create table locations2 as select * from locations;
-select * from locations;
-select * from locations2;
-alter table locations2 rename column location_id to loc_id;
-select * from locations2; -- 컬럼명이 바뀌었다
+-- 테이블 구조만 복사
+create table employees_role as select * from employees where 1=0;
 
-select last_name, department_id, department_name from employees 
-join departments using(department_id); --NULL값 출력 안 됨
-select last_name, department_id, department_name from employees 
-left join departments using(department_id); --NULL값 출력됨
+insert into employees_role values(101, 'Neena', 'Kochhar', 'NKOCHHAR', '515.123.4568', '1989-09-21', 'AD_VP', 17000.00, NULL, 100, 90);
+insert into employees_role values(101, 'Neena', 'Kochhar', 'NKOCHHAR', '515.123.4568', '1989-09-21', 'AD_VP', 17000.00, NULL, 100, 90);
+insert into employees_role values(101, 'Nee', 'Ko', 'NKOCHHAR', '515.123.4568', '1989-09-21', 'AD_VP', 17000.00, NULL, 100, 90);
+insert into employees_role values(200, 'Neena', 'Kochhar', 'NKOCHHAR', '515.123.4568', '1989-09-21', 'AD_VP', 17000.00, NULL, 100, 90);
+insert into employees_role values(200, 'Nee', 'Kochhar', 'NKOCHHAR', '515.123.4568', '1989-09-21', 'AD_VP', 17000.00, NULL, 100, 90);
+insert into employees_role values(300, 'GilDong', 'Hong', 'NKOCHHAR', '010-123-4567', '2009-03-01', 'IT_PROG', 23000.00, NULL, 100, 90);
 
-select last_name, department_id, department_name from employees 
-right join departments using(department_id);
+commit;
 
-select last_name, department_id, department_name from employees
-full join departments using(department_id);
+select employee_id, last_name from employees
+union
+select employee_id, last_name from employees_role;
 
-select last_name, department_id, manager_id from employees
-inner join departments using(department_id, manager_id);
+select employee_id, last_name from employees
+union all
+select employee_id, last_name from employees_role;
 
--- [문제3] 위치ID, 부서ID을 연결해서 사원이름, 도시, 부서이름을 출력하시오
--- 관련 테이블 : EMPLOYEES, LOCATIONS2, DEPARTMENTS
-SELECT * FROM EMPLOYEES;
-SELECT * FROM LOCATIONS;
-SELECT * FROM DEPARTMENTS;
-SELECT LAST_NAME, CITY, DEPARTMENT_NAME
-FROM EMPLOYEES, LOCATIONS2, DEPARTMENTS
-LEFT JOIN EMPLOYEES USING(LOCATIONS, DEPARTMENTS);
--- 선생님 답
-SELECT LAST_NAME AS 사원이름,
-       CITY AS "도 시",
-       DEPARTMENT_NAME AS 부서이름
-FROM EMPLOYEES
-JOIN DEPARTMENTS USING(DEPARTMENT_ID)
-JOIN LOCATIONS2 ON(LOCATION_ID = LOC_ID)
-WHERE CITY IN ('Seattle', 'Oxford')
-ORDER BY 2, 1;
+select salary  from employees where department_id=10
+union all
+select salary  from employees where department_id=30 order by 1;
 
--- [문제4]
-SELECT EMPLOYEE_ID AS 사원번호,
-       LAST_NAME AS 사원이름,
-       DEPARTMENT_NAME AS 부서이름,
-       CITY AS "도 시",
-       STREET_ADDRESS AS 도시주소,
-       COUNTRY_NAME AS 나라이름
-FROM EMPLOYEES
-LEFT JOIN DEPARTMENTS USING(DEPARTMENT_ID)
-JOIN LOCATIONS2 ON(LOCATION_ID = LOC_ID) --컬럼명이 달라서 ON 사용
-JOIN COUNTRIES USING(COUNTRY_ID)
-WHERE STREET_ADDRESS LIKE '%Ch%'
-      OR STREET_ADDRESS LIKE '%Sh%'
-      OR STREET_ADDRESS LIKE '%Rd%'
-ORDER BY 6, 4;
+-- [문제1] employees와 employees_role에서 레코드의 사원명단을 구하시오
+-- 조건1) 사원이름, 업무ID, 부서ID을 표시하시오
+-- 조건2) employees 에서는 부서ID가 10인 사원만 검색
+--       employees_role에서는 업무ID가 IT_PROG만 검색
+-- 조건3) 중복되는 레코드는 제거
+select * from employees;
+select * from employees_role;
+SELECT LAST_NAME, JOB_ID, DEPARTMENT_ID FROM EMPLOYEES
+WHERE DEPARTMENT_ID=10
+UNION
+SELECT LAST_NAME, JOB_ID, DEPARTMENT_ID FROM EMPLOYEES_ROLE
+WHERE JOB_ID='IT_PROG';
+
