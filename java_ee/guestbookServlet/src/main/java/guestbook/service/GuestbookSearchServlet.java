@@ -36,15 +36,14 @@ public class GuestbookSearchServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
-		out.println("<body>");
+		out.println("<body style='padding:16px;'>");
 		if (logtime==null) {
 			out.println("<h3>검색 결과가 없습니다.</h3>");
-			//이전 버튼
 			out.println("<input type='button' value='← 다시 검색' onclick='history.go(-1)'>");
 		}
 		else {
 			out.println("<h3>검색 결과</h3>");
-			out.println("<table border='1' cellpadding='10' cellspacing='0'>");
+			out.println("<table border='1' cellpadding='10' cellspacing='0' width='400px'>");
 			out.println("<tr><th>작성자</th><td>");
 			out.println(name);
 			out.println("</td><th>작성일</th><td>");
@@ -55,9 +54,9 @@ public class GuestbookSearchServlet extends HttpServlet {
 			out.println(homepage);
 			out.println("</td></tr><tr><th>제목</th><td colspan='3'>");
 			out.println(subject);
-			out.println("</td></tr><tr><td colspan='4'>");
+			out.println("</td></tr><tr><td colspan='4' height='200px'><pre>");
 			out.println(content);
-			out.println("</td></tr>");
+			out.println("</pre></td></tr>");
 			out.println("</table><br/>");
 			out.println("<input type='button' value='← 다시 검색' onclick='history.go(-1)'>");
 			out.println("</body>");

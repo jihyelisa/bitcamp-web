@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import guestbook.bean.GuestbookDTO;
 
 public class GuestbookDAO {
@@ -35,7 +37,7 @@ public class GuestbookDAO {
 	
 	private static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
 		try {
-			if(rs != null) pstmt.close();
+			if(rs != null) rs.close();
 			if(pstmt != null) conn.close();
 			if(conn != null) pstmt.close();
 		} catch (SQLException e) {
@@ -92,7 +94,8 @@ public class GuestbookDAO {
 
 	public GuestbookDTO guestbookSearch(String seq) {
 		GuestbookDTO guestbookDTO = new GuestbookDTO();
-		String sql = "SELECT * FROM GUESTBOOK WHERE SEQ=?";
+		String sql = "SELECT SEQ,NAME,EMAIL,HOMEPAGE,SUBJECT,CONTENT,"
+				   + "TO_CHAR(LOGTIME,'YYYY.MM.DD') AS LOGTIME FROM GUESTBOOK WHERE SEQ=?";
 		
 		//생성자 안에 접속 코드를 작성하면 단 한 번만 접속 가능하게 됨
 		this.getConnection();
@@ -121,4 +124,61 @@ public class GuestbookDAO {
 		}
 		return guestbookDTO;
 	}
+
+	public ArrayList<GuestbookDTO> guestbookList(int startNum, int endNum) {
+		ArrayList<GuestbookDTO> list = new ArrayList<GuestbookDTO>();
+		
+		String sql = "SELECT * FROM ("
+				   + "SELECT ROWNUM RN, AA.*"
+				   + "FROM (SELECT NAME,EMAIL,HOMEPAGE,SUBJECT,CONTENT,"
+				   + "      TO_CHAR(LOGTIME,'YYYY.MM.DD') AS LOGTIME"
+				   + "      FROM GUESTBOOK ORDER BY SEQ DESC) AA"
+				   + "      ) WHERE RN>=? AND RN<=?";
+		
+		this.getConnection();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endNum);
+			rs = pstmt.executeQuery(); //테이블 형태로 결과 반환
+			
+			while(rs.next()) {
+				GuestbookDTO guestbookDTO = new GuestbookDTO();
+				guestbookDTO.setName(rs.getString("NAME"));
+				guestbookDTO.setEmail(rs.getString("EMAIL"));
+				guestbookDTO.setHomepage(rs.getString("HOMEPAGE"));
+				guestbookDTO.setSubject(rs.getString("SUBJECT"));
+				guestbookDTO.setContent(rs.getString("CONTENT"));
+				guestbookDTO.setLogtime(rs.getString("LOGTIME"));
+				list.add(guestbookDTO);
+			} //while
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			GuestbookDAO.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+
+	public int getTotalA() {
+		String sql = "SELECT COUNT(*) FROM GUESTBOOK";
+		int totalA = 0;
+		
+		this.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) totalA = rs.getInt("COUNT(*)");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			GuestbookDAO.close(conn, pstmt, rs);
+		}
+		return totalA;
+	}
 }
+
