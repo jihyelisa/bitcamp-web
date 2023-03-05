@@ -38,6 +38,12 @@
 		background-color: Thistle;
 		color: white;
 	}
+	#nameDiv, #idDiv, #pwdDiv, #repwdDiv, #emailDiv, #phoneDiv, #addrDiv {
+		margin-top:8px;
+		color: hotpink;
+		font-weight: 600;
+		font-size: 12px;
+	}
 </style>
 </head>
 
@@ -139,9 +145,9 @@
 		
 		<tr>
 			<td colspan="2" align="center">
-				<input type='button' value='로그인' onclick="location.href='loginForm.html'" class="select">
 				<input type="button" value="가입하기" onclick="check()" class="select">
 				<input type="reset" value="다시작성" name="reset" class="select">
+				<input type='button' value='로그인' onclick="location.href='loginForm.html'" class="select">
 			</td>
 		</tr>
 	</table>

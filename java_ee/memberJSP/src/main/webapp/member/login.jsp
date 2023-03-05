@@ -24,8 +24,12 @@
 	<h3>로그인 실패</h3>
 	<input type='button' value='← 이전' onclick='history.go(-1)'>
 	
-	<% } else %>
+	<% } else { %>
 	<h3>로그인 성공</h3>
-
+	
+	<form method="post" action="updateForm.jsp">
+	<button type="submit" name="id" value=<%=id%> class="select">회원정보 수정</button>
+	</form>
+	<% } %>
 </body>
 </html>

@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
+
 import member.bean.MemberDTO;
 
 public class MemberDAO {
@@ -125,5 +127,72 @@ public class MemberDAO {
 			//close를 static 함수로 선언해서 new 할 필요 없게 함
 		}
 		return isMember;
+	}
+	
+	public MemberDTO memberUpdateForm(String id) {
+		MemberDTO memberDTO = new MemberDTO();
+		String sql = "SELECT * FROM MEMBER WHERE ID=?";
+		
+		this.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				memberDTO.setName(rs.getString("NAME"));
+				memberDTO.setPwd(rs.getString("PWD"));
+				memberDTO.setGender(rs.getString("GENDER"));
+				memberDTO.setEmail1(rs.getString("EMAIL1"));
+				memberDTO.setEmail2(rs.getString("EMAIL2"));
+				memberDTO.setPhone1(rs.getString("TEL1"));
+				memberDTO.setPhone2(rs.getString("TEL2"));
+				memberDTO.setPhone3(rs.getString("TEL3"));
+				memberDTO.setZipcode(rs.getString("ZIPCODE"));
+				memberDTO.setAddr1(rs.getString("ADDR1"));
+				memberDTO.setAddr2(rs.getString("ADDR2"));
+			} //if
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			MemberDAO.close(conn, pstmt, rs);
+			
+		} return memberDTO;
+	}
+	
+	public int memberUpdate(MemberDTO memberDTO) {
+		int su = 0;
+		String sql = "UPDATE MEMBER SET NAME=?, PWD=?, GENDER=?, EMAIL1=?, EMAIL2=?,"
+				   + "TEL1=?, TEL2=?, TEL3=?, ZIPCODE=?, ADDR1=?, ADDR2=? WHERE ID=?";
+
+		this.getConnection(); //아래의 접속 메소드 호출
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberDTO.getName());
+			pstmt.setString(2, memberDTO.getPwd());
+			pstmt.setString(3, memberDTO.getGender());
+			pstmt.setString(4, memberDTO.getEmail1());
+			pstmt.setString(5, memberDTO.getEmail2());
+			pstmt.setString(6, memberDTO.getPhone1());
+			pstmt.setString(7, memberDTO.getPhone2());
+			pstmt.setString(8, memberDTO.getPhone3());
+			pstmt.setString(9, memberDTO.getZipcode());
+			pstmt.setString(10, memberDTO.getAddr1());
+			pstmt.setString(11, memberDTO.getAddr2());
+			pstmt.setString(12, memberDTO.getId());
+			
+			su = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			MemberDAO.close(conn, pstmt);
+		}
+	return su;
 	}
 }
