@@ -90,20 +90,18 @@ public class MemberDAO {
 			pstmt.setString(12, memberDTO.getAddr2());
 			
 			su = pstmt.executeUpdate();
-			System.out.println(su + "행이(가) 삽입되었습니다.");
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
 		} finally {
 			MemberDAO.close(conn, pstmt);
 			//close를 static 함수로 선언해서 new 할 필요 없게 함
 		} return su;
 	}
 	
-	public boolean memberCheck(String id, String pwd) {
-		boolean isMember = false;
-		String sql = "SELECT ID, PWD FROM MEMBER";
+	public String memberCheck(String id, String pwd) {
+		String name = null;
+		String sql = "SELECT ID, PWD, NAME FROM MEMBER";
 		
 		//생성자 안에 접속 코드를 작성하면 단 한 번만 접속 가능하게 됨
 		this.getConnection();
@@ -114,19 +112,17 @@ public class MemberDAO {
 			
 			while(rs.next()) {
 				if(rs.getString("ID").equals(id) && rs.getString("PWD").equals(pwd)) {
-						isMember=true;
+						name = rs.getString("NAME");
 						break;
 				} //if
 			} //while
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
 		} finally {
 			MemberDAO.close(conn, pstmt, rs);
 			//close를 static 함수로 선언해서 new 할 필요 없게 함
-		}
-		return isMember;
+		} return name;
 	}
 	
 	public MemberDTO memberUpdateForm(String id) {
@@ -156,10 +152,8 @@ public class MemberDAO {
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
 		} finally {
 			MemberDAO.close(conn, pstmt, rs);
-			
 		} return memberDTO;
 	}
 	
@@ -189,10 +183,26 @@ public class MemberDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
 		} finally {
 			MemberDAO.close(conn, pstmt);
-		}
-	return su;
+		} return su;
+	}
+	
+	public int memberDelete(String id) {
+		int su = 0;
+		String sql = "DELETE FROM MEMBER WHERE ID=?";
+
+		this.getConnection(); //아래의 접속 메소드 호출
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			su = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MemberDAO.close(conn, pstmt);
+		} return su;
 	}
 }

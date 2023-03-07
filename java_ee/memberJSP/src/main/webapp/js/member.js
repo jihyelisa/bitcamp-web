@@ -1,5 +1,6 @@
 function select() {
-	document.writeForm.email2.value = document.writeForm.email3.value;
+	
+	document.getElementById("email2").value = document.getElementById("email3").value;
 }
 
 
@@ -30,6 +31,32 @@ function check() {
 		document.getElementById("addrDiv").innerText = "주소를 입력하세요";
 	} else {
 		document.writeForm.submit();
+	}
+}
+
+function updateCheck() {
+	//경고문 초기화
+	document.getElementById("nameDiv").innerText = "";
+	document.getElementById("pwdDiv").innerText = "";
+	document.getElementById("repwdDiv").innerText = "";
+	document.getElementById("emailDiv").innerText = "";
+	document.getElementById("phoneDiv").innerText = "";
+	document.getElementById("addrDiv").innerText = "";
+
+	if (document.updateForm.name.value == "") {
+	    document.getElementById("nameDiv").innerText = "이름을 입력하세요";
+	} else if (document.updateForm.pwd.value == "") {
+		document.getElementById("pwdDiv").innerText = "비밀번호를 입력하세요";
+	} else if (document.updateForm.pwd.value != document.updateForm.repwd.value) {
+		document.getElementById("repwdDiv").innerText = "비밀번호가 일치하지 않습니다";
+	} else if (document.updateForm.email1.value == "" || document.updateForm.email2.value == "") {
+		document.getElementById("emailDiv").innerText = "이메일을 입력하세요";
+	} else if (document.updateForm.phone2.value == "" || document.updateForm.phone3.value == "") {
+		document.getElementById("phoneDiv").innerText = "전화번호를 입력하세요";
+	} else if (document.updateForm.zipcode.value == "" || document.updateForm.addr1.value == "") {
+		document.getElementById("addrDiv").innerText = "주소를 입력하세요";
+	} else {
+		document.updateForm.submit();
 	}
 }
 

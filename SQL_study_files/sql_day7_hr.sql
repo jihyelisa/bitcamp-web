@@ -56,3 +56,71 @@ ORDER BY 1;
 
 SELECT * FROM V_VIEW4;
 
+-- [문제4] 다음의 조건에 맞게 테이블, 시퀀스, 뷰 객체를 작성하시오
+-- 1) bookshop 테이블 작성한 후 데이터를 입력하시오
+CREATE TABLE BOOKSHOP (
+isbn varchar2(10) CONSTRAINT PISBN PRIMARY KEY,  -- 기본키 (제약조건명 : PISBN)
+title varchar2(50) CONSTRAINT CTIT NOT NULL,  -- 널값 허용X (제약조건명 : CTIT), 책제목
+author varchar2(50),  -- 저자 
+price number,      -- 금액
+company varchar2(30)  -- 출판사
+);
+
+SELECT * FROM USER_CONSTRAINTS
+WHERE TABLE_NAME='BOOKSHOP';
+
+INSERT INTO BOOKSHOP
+VALUES ('is001', '자바3일완성', '김자바', 25000, '야메루출판사');
+INSERT INTO BOOKSHOP
+VALUES ('pa002', 'JSP달인되기', '이달인', 28000, '공갈닷컴');
+INSERT INTO BOOKSHOP
+VALUES ('or003', '오라클무작정따라하기', '박따라', 23500, '야메루출판사');
+
+-- 2) bookorder 테이블 작성하시오
+CREATE TABLE BOOKORDER (
+idx number PRIMARY KEY,      -- 기본키, 일련번호         
+isbn varchar2(10) CONSTRAINT FKISBN NOT NULL,  -- 외래키 (제약조건명 : FKISBN), bookshop의 isbn의 자식키
+qty number,       -- 수량
+FOREIGN KEY (ISBN) REFERENCES BOOKSHOP(ISBN)
+);
+
+SELECT * FROM USER_CONSTRAINTS
+WHERE TABLE_NAME='BOOKORDER';
+
+-- 3) 시퀀스 객체 작성하기
+CREATE SEQUENCE IDX_SEQ NOCYCLE NOCACHE;
+
+-- 4) bookorder 테이블에 데이터를 입력하시오 (일련번호는 시퀀스 객체 이용)
+INSERT INTO BOOKORDER VALUES (IDX_SEQ.NEXTVAL, 'is001', 2);
+INSERT INTO BOOKORDER VALUES (IDX_SEQ.NEXTVAL, 'or003', 3);
+INSERT INTO BOOKORDER VALUES (IDX_SEQ.NEXTVAL, 'pa002', 5);
+INSERT INTO BOOKORDER VALUES (IDX_SEQ.NEXTVAL, 'is001', 3);
+INSERT INTO BOOKORDER VALUES (IDX_SEQ.NEXTVAL, 'or003', 10);
+
+-- 5) 뷰 객체를 작성하시오
+-- 뷰 명 : bs_view
+-- 조건1) 컬럼명 지정 (책제목, 저자, 총판매금액)
+-- 조건2) 총판매금액은 qty * price로 하시오
+-- 조건3) 수정불가의 제약조건을 추가하시오
+-- 조건4) 책제목이 같은 것은 묶어서 출력하시오
+-- 조건5) 총판매금액은 3자리마다 ,를 넣으시오
+-- 내가 쓴 코드
+CREATE OR REPLACE VIEW BS_VIEW
+AS SELECT TITLE AS 책제목, AUTHOR AS 저자,
+TO_CHAR(QTY*PRICE, '999,999') AS 총판매금액
+FROM BOOKSHOP
+JOIN BOOKORDER USING(ISBN)
+GROUP BY TITLE, AUTHOR
+WITH READ ONLY;
+-- 선생님 코드
+CREATE OR REPLACE VIEW BS_VIEW(책제목, 저자, 총판매금액)
+AS SELECT TITLE, AUTHOR, TO_CHAR(sum(QTY*PRICE), '999,999') AS 총판매금액
+FROM BOOKSHOP
+JOIN BOOKORDER USING(ISBN)
+GROUP BY TITLE, AUTHOR
+WITH READ ONLY;
+
+SELECT * FROM BOOKSHOP;
+SELECT * FROM BOOKORDER;
+SELECT * FROM BS_VIEW;
+

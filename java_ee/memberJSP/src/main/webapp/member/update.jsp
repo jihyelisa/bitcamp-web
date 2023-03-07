@@ -50,9 +50,12 @@
 	<h3>수정된 회원정보 저장 실패</h3>
 	<input type='button' value='← 이전' onclick='history.go(-1)'>
 <% } else { %>
-	<h3>회원정보 수정 완료</h3>
-	<input type='button' value='← 이전' onclick='history.go(-1)'>
-	<input type='button' value='로그인' onclick="location.href='loginForm.html'">
+	<script type="text/javascript">
+		window.onload=function() {
+		alert("회원정보 수정 완료");
+		location.href = "loginForm.html"
+		}
+	</script>
 <% } %>
 </body>
 </html>

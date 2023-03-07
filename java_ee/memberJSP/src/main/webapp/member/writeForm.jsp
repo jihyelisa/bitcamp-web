@@ -103,8 +103,8 @@
 			<td>
 				<input type="text" name="email1" style="width: 120px;">
 				<span>@</span>
-				<input type="text" name="email2" style="width: 120px;">
-				<select name="email3" style="width: 100px;" onchange="select()">
+				<input type="text" name="email2" id="email2" style="width: 120px;">
+				<select name="email3" id="email3" style="width: 100px;" onchange="select()">
 				    <option value="">직접입력</option>
 				    <option value="naver.com">naver.com</option>
 				    <option value="gmail.com">gmail.com</option>
@@ -134,7 +134,7 @@
 			<th>주소</th>
 			<td>
 				<input type="text" name="zipcode" id="zipcode" placeholder="우편번호" readonly>
-				<input type="button" value="우편번호 검색" name="zipButton" id="zipButton" onclick="execDaumPostcode()">
+				<input type="button" value="우편번호 검색" name="zipButton" id="zipButton" onclick="execDaumPostcode()" style="margin-left:16px;">
 				<br/><br/>
 				<input type="text" name="addr1" id="addr1" placeholder="주소" style="width: 90%;" readonly>
 				<br/><br/>
