@@ -4,7 +4,6 @@
 <% 
 //데이터
 String name = null;
-String id = null;
 
 //쿠키
 /*
@@ -26,12 +25,8 @@ if (ar != null) {
 
 //세션
 name = (String)session.getAttribute("memName");
-id = (String)session.getAttribute("memId");
 //getAttribute()는 값을 Object 타입으로 가져옴
 //자식 클래스인 String이 부모 클래스 Object를 바로 참조할 수 없으므로 형변환
-
-session.setAttribute("memId", id);
-
 %>
     
 <!DOCTYPE html>

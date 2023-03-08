@@ -39,6 +39,7 @@
 		//HttpSession session = request.getSession(); //JSP는 세션 객체 생성 할 필요 없음 - 이미 내장돼 있음
 		session.setAttribute("memName", name);
 		session.setAttribute("memId", id);
+		session.setAttribute("memPwd", pwd);
 		
 		//페이지 이동
 		response.sendRedirect("loginOk.jsp");

@@ -148,6 +148,8 @@ public class MemberDAO {
 				memberDTO.setZipcode(rs.getString("ZIPCODE"));
 				memberDTO.setAddr1(rs.getString("ADDR1"));
 				memberDTO.setAddr2(rs.getString("ADDR2"));
+				
+				System.out.println("DAO" + memberDTO.getName());
 			} //if
 		
 		} catch (SQLException e) {
