@@ -40,7 +40,7 @@ session.setAttribute("memId", id);
 <meta charset="UTF-8">
 <title>Login</title>
 </head>
-<body>
+<body style="background-color: #F7F7EE;">
 <img src="../image/ice.jpg" alt="icecream" onclick="location.href='../index.jsp'" style="width:50px; cursor:pointer;">
 <h3>
 	<%=name%>님 로그인 성공

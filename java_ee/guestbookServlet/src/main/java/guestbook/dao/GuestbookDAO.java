@@ -173,6 +173,7 @@ public class GuestbookDAO {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) totalA = rs.getInt("COUNT(*)");
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

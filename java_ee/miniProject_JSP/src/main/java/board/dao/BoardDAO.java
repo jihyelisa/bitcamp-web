@@ -1,10 +1,17 @@
 package board.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import board.bean.BoardDTO;
 
@@ -13,11 +20,7 @@ public class BoardDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs; //테이블 형태
 	
-	private String driver = "oracle.jdbc.driver.OracleDriver";
-	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
-					//"db 접근:db 종류:oracle에서 사용하는 드라이브:@어디로 접속:포트번호"
-	private String username = "C##JAVA";
-	private String password = "1234";
+	private DataSource ds;
 	
 	private static BoardDAO boardDAO = new BoardDAO();
 	public static BoardDAO getInstance() {
@@ -45,35 +48,28 @@ public class BoardDAO {
 	
 	public BoardDAO() { //생성자로 driver loading
 		try {
-			//Class타입으로 생성 (new 사용 불가)
-			Class.forName(driver);
-			System.out.println("driver loading 성공");
-		} catch (ClassNotFoundException e) {
+			Context ctx = new InitialContext();
+			ds = (DataSource)ctx.lookup("java:comp/env/jdbc/oracle");
+			//Tomcat 서버는 java:comp/env/를 앞에 붙여주어야 함
+			
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
-
-	//언제나 접속할 수 있게 따로 메소드 작성
-	public void getConnection() {
-		try {
-			conn = DriverManager.getConnection(url, username, password);
-			System.out.println("connection 성공");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-		
-	public int boardWrite(BoardDTO boardDAO) {
+	
+	public int boardWrite(Map<String, String> map) {
 		int su = 0;
-		String sql = "INSERT INTO (SEQ, SUBJECT, CONTENT) BOARD VALUES (SEQ_BOARD.NEXTVAL,?,?)";
-		
-		//생성자 안에 접속 코드를 작성하면 단 한 번만 접속 가능하게 됨
-		this.getConnection();
+		String sql = "INSERT INTO BOARD (SEQ,ID,NAME,EMAIL,SUBJECT,CONTENT,REF)"
+				   + "VALUES (SEQ_BOARD.NEXTVAL,?,?,?,?,?,SEQ_BOARD.CURRVAL)";
 		
 		try {
+			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, boardDAO.getSubject());
-			pstmt.setString(2, boardDAO.getContent());
+			pstmt.setString(1, map.get("id"));
+			pstmt.setString(2, map.get("name"));
+			pstmt.setString(3, map.get("email"));
+			pstmt.setString(4, map.get("subject"));
+			pstmt.setString(5, map.get("content"));
 			
 			su = pstmt.executeUpdate();
 		
@@ -85,4 +81,61 @@ public class BoardDAO {
 		} return su;
 	}
 	
+	public List<BoardDTO> boardList(int startNum, int endNum) {
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
+		String sql = "SELECT * "
+				   + "FROM (SELECT ROWNUM RN, AA.* "
+				   + "FROM (SELECT * FROM BOARD ORDER BY REF DESC, STEP ASC) AA "
+				   + ") WHERE RN BETWEEN ? AND ?";
+
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endNum);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardDTO boardDTO = new BoardDTO();
+				boardDTO.setSeq(rs.getInt("SEQ"));
+				boardDTO.setId(rs.getString("ID"));
+				boardDTO.setName(rs.getString("NAME"));
+				boardDTO.setEmail(rs.getString("EMAIL"));
+				boardDTO.setSubject(rs.getString("SUBJECT"));
+				boardDTO.setContent(rs.getString("CONTENT"));
+				boardDTO.setRef(rs.getInt("REF"));
+				boardDTO.setLev(rs.getInt("LEV"));
+				boardDTO.setStep(rs.getInt("STEP"));
+				boardDTO.setPseq(rs.getInt("PSEQ"));
+				boardDTO.setReply(rs.getInt("REPLY"));
+				boardDTO.setHit(rs.getInt("HIT"));
+				boardDTO.setLogtime(rs.getDate("LOGTIME"));
+				
+				list.add(boardDTO);
+			} //while
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			list = null; //에러났을 경우 null로 초기화
+		} finally {
+			BoardDAO.close(conn, pstmt, rs);
+		} return list;
+	}
+	
+	public int getTotalA() {
+		String sql = "SELECT COUNT(*) FROM BOARD";
+		int totalA = 0;
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) totalA = rs.getInt("COUNT(*)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			BoardDAO.close(conn, pstmt, rs);
+		} return totalA;
+	}
 }

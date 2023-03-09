@@ -72,8 +72,6 @@
 	String zipcode = memberDTO.getZipcode();
 	String addr1 = memberDTO.getAddr1();
 	String addr2 = memberDTO.getAddr2();
-	
-	System.out.print("updateForm" + name);
 %>
 
 <h3><i>Has your profile changed?</i></h3>

@@ -17,10 +17,10 @@
 	
 	//DB
 	MemberDAO memberDAO = MemberDAO.getInstance();
-	String name = memberDAO.memberCheck(id, pwd);
+	MemberDTO memberDTO = memberDAO.memberLogin(id, pwd);
 	
 	//데이터를 쿠키에 실을 건지 세션에 실을 건지 - 세션을 더 많이 사용
-	if (name==null) {
+	if (memberDTO.getName()==null) {
 		//페이지 이동
 		response.sendRedirect("loginFail.jsp");
 	} else {
@@ -37,7 +37,8 @@
 
 		//세션
 		//HttpSession session = request.getSession(); //JSP는 세션 객체 생성 할 필요 없음 - 이미 내장돼 있음
-		session.setAttribute("memName", name);
+		session.setAttribute("memName", memberDTO.getName());
+		session.setAttribute("memEmail", memberDTO.getEmail1() + "@" + memberDTO.getEmail2());
 		session.setAttribute("memId", id);
 		session.setAttribute("memPwd", pwd);
 		
