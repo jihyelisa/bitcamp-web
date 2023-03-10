@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -137,5 +138,28 @@ public class BoardDAO {
 		} finally {
 			BoardDAO.close(conn, pstmt, rs);
 		} return totalA;
+	}
+	
+	public Map<String, String> boardView(int seq) {
+		String sql = "SELECT SUBJECT, CONTENT FROM BOARD WHERE SEQ=?";
+		Map<String, String> map = new HashMap<String, String>();
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, seq);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				map.put("subject", rs.getString("SUBJECT"));
+				map.put("content", rs.getString("CONTENT"));
+			} //while
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			map = null; //에러났을 경우 null로 초기화
+		} finally {
+			BoardDAO.close(conn, pstmt, rs);
+		} return map;
 	}
 }
