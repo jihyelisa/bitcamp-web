@@ -10,6 +10,7 @@
 	body{
 		margin: 50px;
 		font-family: serif;
+		background-color: LemonChiffon;
 		}
 	h3 {
 		color: Salmon;
@@ -65,7 +66,8 @@
 		<tr>
 			<th>아이디</th>
 			<td>
-				<input type="text" name="id" placeholder="아이디를 입력하세요">
+				<input type="text" name="id" placeholder="아이디를 입력하세요" onchange="isChecked()">
+				<input type="button" value="중복체크" onclick="checkId()">
 				<div id="idDiv"></div>
 			</td>
 		</tr>
@@ -145,7 +147,7 @@
 		
 		<tr>
 			<td colspan="2" align="center">
-				<input type="button" value="가입하기" onclick="check()" class="select">
+				<input type="button" value="가입하기" onclick="writeCheck()" class="select">
 				<input type="reset" value="다시작성" name="reset" class="select">
 				<input type='button' value='로그인' onclick="location.href='loginForm.jsp'" class="select">
 			</td>
@@ -156,7 +158,7 @@
 <!-- 다음 우편번호 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- 절대주소로 js파일로 이어줌 (상대주소도 사용 가능) -->
-<script type="text/javascript" src="http://localhost:8080/memberJSP/js/member.js"></script>
+<script type="text/javascript" src="http://localhost:8080/miniProject_JSP/js/member.js"></script>
 
 </body>
 </html>

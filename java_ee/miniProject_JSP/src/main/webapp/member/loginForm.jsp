@@ -10,6 +10,7 @@
 body{
 	margin: 50px;
 	font-family: serif;
+	background-color: #EDF1D6;
 	}
 h2 {
 	color: #609966;
@@ -27,6 +28,10 @@ input, button {
 	border: #EDF1D6;
 	color: #40513B;
 	font-weight: 700;
+}
+input:hover, input:hover,
+button:hover, button:active {
+	text-decoration: underline;
 }
 th {
 	padding: 8px;

@@ -10,6 +10,7 @@
 	body{
 		margin: 50px;
 		font-family: serif;
+		background-color: #eeeeee;
 		}
 	h3 {
 		color: #539165;

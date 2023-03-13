@@ -4,8 +4,20 @@ function select() {
 }
 
 
-//유효성 검사
-function check() {
+var checked = "";
+
+function checkId() {
+	var id = document.writeForm.id.value;
+	if (id == "") document.getElementById("idDiv").innerText = "아이디를 입력하세요";
+	else {
+		window.open("./checkId.jsp?id=" + id, "checkId", "width=400 height=150");
+		checked = "checked";
+	}
+}
+function isChecked() {checked = "";}
+
+//회원가입 유효성 검사
+function writeCheck() {
 	//경고문 초기화
 	document.getElementById("nameDiv").innerText = "";
 	document.getElementById("idDiv").innerText = "";
@@ -29,11 +41,14 @@ function check() {
 		document.getElementById("phoneDiv").innerText = "전화번호를 입력하세요";
 	} else if (document.writeForm.zipcode.value == "" || document.writeForm.addr1.value == "") {
 		document.getElementById("addrDiv").innerText = "주소를 입력하세요";
+	} else if (checked != "checked") {
+		alert("아이디 중복체크 하십시오");
 	} else {
 		document.writeForm.submit();
 	}
 }
 
+//회원정보 수정 유효성 검사
 function updateCheck() {
 	//경고문 초기화
 	document.getElementById("nameDiv").innerText = "";

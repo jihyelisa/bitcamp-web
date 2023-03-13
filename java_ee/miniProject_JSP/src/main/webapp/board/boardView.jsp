@@ -8,12 +8,15 @@
 
 <%
 int seq = Integer.parseInt(request.getParameter("seq"));
+int pg = Integer.parseInt(request.getParameter("pg"));
 
 BoardDAO boardDAO = BoardDAO.getInstance();
-Map<String, String> map = boardDAO.boardView(seq);
+BoardDTO boardDTO = boardDAO.boardView(seq);
 
-String subject = map.get("subject");
-String content = map.get("content");
+String name = boardDTO.getName();
+String subject = boardDTO.getSubject();
+String content = boardDTO.getContent();
+int hit = boardDTO.getHit();
 %>
 
 <html>
@@ -38,8 +41,6 @@ String content = map.get("content");
 		background-color: #EDE9D5;
 		color: #617143;
 		border: #E7AB9A 2px solid;
-		border-left: 0;
-		border-right: 0;
 		}
 	th {
 		width: 100px;
@@ -94,7 +95,25 @@ String content = map.get("content");
 		font-size: 16px;
 		margin: 4px 200px;
   		cursor: pointer;
-		}
+	}
+	pre {
+    	white-space: pre-wrap;
+    }
+    .info {
+    	margin: 32px;
+    }
+    button {
+		background-color: #E7AB9A;
+		border: none;
+		color: white;
+		padding: 5px 20px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 200px;
+  		cursor: pointer;
+    }
 </style>
 
 </head>
@@ -103,18 +122,22 @@ String content = map.get("content");
 <table border="1" cellpadding="10" cellspacing="0">
 	<tr>
 		<th>제목</th>
-		<td><%=subject%></td>
-	</tr>
-	<tr>
-		<th>내용</th>
-		<td><%=content%></td>
+		<td><h1><%=subject%></h1></td>
 	</tr>
 	<tr>
 		<td colspan="2">
-			<button onclick="location.href='boardList.jsp?pg=1'">목록</button>
+			<span class="info">글번호: <%=seq%></span>
+			<span class="info">작성자: <%=name%></span>
+			<span class="info">조회수: <%=hit%></span>
 		</td>
 	</tr>
+	<tr>
+		<th>내용</th>
+		<td><pre><%=content%></pre></td>
+	</tr>
 </table>
+<br>
+<button onclick="location.href='boardList.jsp?pg=<%=pg%>'">목록</button>
 
 </body>
 </html>

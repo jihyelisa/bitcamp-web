@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -140,9 +139,9 @@ public class BoardDAO {
 		} return totalA;
 	}
 	
-	public Map<String, String> boardView(int seq) {
-		String sql = "SELECT SUBJECT, CONTENT FROM BOARD WHERE SEQ=?";
-		Map<String, String> map = new HashMap<String, String>();
+	public BoardDTO boardView(int seq) {
+		String sql = "SELECT * FROM BOARD WHERE SEQ=?";
+		BoardDTO boardDTO = new BoardDTO();
 		
 		try {
 			conn = ds.getConnection();
@@ -151,15 +150,44 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				map.put("subject", rs.getString("SUBJECT"));
-				map.put("content", rs.getString("CONTENT"));
+				boardDTO.setSeq(rs.getInt("SEQ"));
+				boardDTO.setId(rs.getString("ID"));
+				boardDTO.setName(rs.getString("NAME"));
+				boardDTO.setEmail(rs.getString("EMAIL"));
+				boardDTO.setSubject(rs.getString("SUBJECT"));
+				boardDTO.setContent(rs.getString("CONTENT"));
+				boardDTO.setRef(rs.getInt("REF"));
+				boardDTO.setLev(rs.getInt("LEV"));
+				boardDTO.setStep(rs.getInt("STEP"));
+				boardDTO.setPseq(rs.getInt("PSEQ"));
+				boardDTO.setReply(rs.getInt("REPLY"));
+				boardDTO.setHit(rs.getInt("HIT"));
+				boardDTO.setLogtime(rs.getDate("LOGTIME"));
 			} //while
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
-			map = null; //에러났을 경우 null로 초기화
 		} finally {
 			BoardDAO.close(conn, pstmt, rs);
-		} return map;
+		} return boardDTO;
+	}
+	
+	public boolean checkId(String id) {
+		boolean existId = false;
+		String sql = "SELECT * FROM BOARD WHERE ID=?";
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) existId = true;
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			BoardDAO.close(conn, pstmt, rs);
+		} return existId;
 	}
 }

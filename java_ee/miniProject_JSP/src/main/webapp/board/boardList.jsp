@@ -10,27 +10,26 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 
 <%
-//Data
-int pg = Integer.parseInt(request.getParameter("pg"));
-int endNum = pg*5;
-int startNum = endNum-4;
-
-//DB
-BoardDAO boardDAO = BoardDAO.getInstance();
-List<BoardDTO> list = boardDAO.boardList(startNum, endNum);
-int totalA = boardDAO.getTotalA();
-int totalP = (totalA + 4) / 5;
-
-//Pagination
-BoardPaging boardPaging = new BoardPaging();
-boardPaging.setCurrentPage(pg);
-boardPaging.setPageBlock(3);
-boardPaging.setPageSize(5);
-boardPaging.setCurrentPage(pg);
-boardPaging.setTotalA(totalA);
-
-boardPaging.makePagingHTML();
-
+	//Data
+	int pg = Integer.parseInt(request.getParameter("pg"));
+	int endNum = pg*5;
+	int startNum = endNum-4;
+	
+	//DB
+	BoardDAO boardDAO = BoardDAO.getInstance();
+	List<BoardDTO> list = boardDAO.boardList(startNum, endNum);
+	int totalA = boardDAO.getTotalA();
+	int totalP = (totalA + 4) / 5;
+	
+	//Pagination
+	BoardPaging boardPaging = new BoardPaging();
+	boardPaging.setCurrentPage(pg);
+	boardPaging.setPageBlock(3);
+	boardPaging.setPageSize(5);
+	boardPaging.setCurrentPage(pg);
+	boardPaging.setTotalA(totalA);
+	
+	boardPaging.makePagingHTML();
 %>
 
 <html>
@@ -38,15 +37,15 @@ boardPaging.makePagingHTML();
 <meta charset="UTF-8">
 <title>List</title>
 <style type="text/css">
-	body{
+	body {
 		margin: 50px;
 		background-color: #EDE9D5;
 		font-family: serif;
 		font-weight: 600;
-		}
+	}
 	h3 {
 		color: #617143;
-		}
+	}
 	table {
 		width: 600px;
 		text-align: center;
@@ -54,18 +53,25 @@ boardPaging.makePagingHTML();
 		background-color: #EDE9D5;
 		color: #617143;
 		border: #E7AB9A 2px solid;
-		border-left: 0;
-		border-right: 0;
-		}
+		border-left: transparent;
+		border-right: transparent;
+	}
 	th {
 		padding: 8px;
 		background-color: #DF7857;
 		color: #EDE9D5;
 	}
-	.subjectA:link, .subjectA:visited {color: #617143;}
-	.subjectA:hover, .subjectA:active {color: #DF7857; text-decoration: underline;}
-	a, span {text-decoration: none; cursor: pointer;}
+	a, span {
+		text-decoration: none;
+		cursor: pointer;
+	}
 	
+	.subjectA:link, .subjectA:visited {
+		color: #617143;
+	}
+	.subjectA:hover, .subjectA:active {
+		color: #DF7857; text-decoration: underline;
+	}	
 	#currentPaging, #paging, #prevNext {
 		height: 20px;
 		width: 20px;
@@ -76,19 +82,18 @@ boardPaging.makePagingHTML();
 		border-radius: 50%;
 		color: #DF7857;
 		border: 2px #DF7857 solid;
-		}
-	#currentPaging,
-	#paging:hover, #paging:active {
+	}
+	#currentPaging, #paging:hover, #paging:active {
 		color: #617143;
 		border: 2px #617143 solid;
-		}
+	}
 	#prevNext {
 		width: 50px;
 		padding: 2px 4px;
 		color: #DF7857;
 		border-radius: 50%;
 		border: 2px transparent solid;
-		}
+	}
 	#prevNext:hover, #prevNext:active {
 		border-radius: 10%;
 		color: #617143;
@@ -97,7 +102,7 @@ boardPaging.makePagingHTML();
 	.paging {
 		color: #DF7857;
 		padding: 5px;
-		}
+	}
 	input {
 		background-color: #E7AB9A;
 		border: none;
@@ -109,10 +114,10 @@ boardPaging.makePagingHTML();
 		font-size: 16px;
 		margin: 4px 200px;
   		cursor: pointer;
-		}
+	}
 </style>
-
 </head>
+
 <body>
 <h3><i>LIST</i></h3>
 <form name="boardList">
@@ -133,7 +138,7 @@ boardPaging.makePagingHTML();
 		<% if (session.getAttribute("memId")==null) { %>
 			<a class="subjectA" onclick="loginFirst()"><%=boardDTO.getSubject()%></a>
 		<% } else { %>
-			<a class="subjectA" href="boardView.jsp?seq=<%=boardDTO.getSeq()%>"><%=boardDTO.getSubject()%></a>
+			<a class="subjectA" href="boardView.jsp?seq=<%=boardDTO.getSeq()%>&pg=<%=pg%>"><%=boardDTO.getSubject()%></a>
 		<% } %>
 		</td>
 		
