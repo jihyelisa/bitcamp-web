@@ -67,6 +67,9 @@
 			<th>아이디</th>
 			<td>
 				<input type="text" name="id" placeholder="아이디를 입력하세요" onchange="isChecked()">
+				<!-- 선생님 코드 -->
+				<!-- <input type="hidden"> 태그를 추가하여 중복체크를 마치면 위 input 값을 똑같이 입력 -->
+				<!-- 두 input 값이 일치하지 않으면 중복체크 경고가 뜨도록 함 -->
 				<input type="button" value="중복체크" onclick="checkId()">
 				<div id="idDiv"></div>
 			</td>
@@ -81,7 +84,7 @@
 		</tr>
 		
 		<tr>
-			<th>재확인</th>
+			<th>비밀번호 확인</th>
 			<td>
 				<input type="password" name="repwd" style="width: 320px;">
 				<div id="repwdDiv"></div>
