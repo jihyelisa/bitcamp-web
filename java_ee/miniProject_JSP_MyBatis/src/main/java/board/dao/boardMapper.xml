@@ -16,6 +16,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE RN BETWEEN #{startNum} AND #{endNum}
 	</select>
 	
+	<select id="boardSearch" parameterType="java.util.Map" resultType="board">
+		SELECT * 
+		FROM (SELECT ROWNUM RN, AA.* 
+			  FROM (SELECT *
+			  		FROM BOARD
+			  		WHERE 
+			  			<if test='searchType == "name"'>
+			  				NAME LIKE '%' || #{name} || '%'
+			  			</if>
+			  			<if test='searchType == "subject"'>
+			  				SUBJECT LIKE '%' || #{subject} || '%'
+			  			</if>
+			  		ORDER BY REF DESC, STEP ASC) AA)
+		WHERE RN BETWEEN #{startNum} AND #{endNum}
+	</select>
+
 	<select id="getTotalA" resultType="int">
 		SELECT COUNT(*) FROM BOARD
 	</select>

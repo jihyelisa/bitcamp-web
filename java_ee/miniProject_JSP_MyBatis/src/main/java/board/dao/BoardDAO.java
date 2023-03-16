@@ -63,14 +63,14 @@ public class BoardDAO {
 		return list;
 	}
 	
-	public List<BoardDTO> search(int startNum, int endNum) {
+	public List<BoardDTO> boardSearch(String searchBy, String search) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, String> map = new HashMap<String, String>();
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		
-		map.put("startNum", startNum);
-		map.put("endNum", endNum);
-		list = sqlSession.selectList("boardSQL.boardList", map);
+		map.put("searchBy", searchBy);
+		map.put("search", search);
+		list = sqlSession.selectList("boardSQL.boardSearch", map);
 		sqlSession.close();
 		return list;
 	}

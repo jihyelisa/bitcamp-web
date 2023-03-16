@@ -1,7 +1,7 @@
 package member.dao;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,12 +20,11 @@ public class MemberDAO {
 	
 	private SqlSessionFactory sqlSessionFactory; //sql 세션을 만들기 위해 필요
 	public MemberDAO() {
-		InputStream inputStream;
 		try {
 			//만들어 놓은 환경설정 파일 읽어옴
-			inputStream = Resources.getResourceAsStream("/conf/mybatis-config.xml");
+			Reader reader = Resources.getResourceAsReader("/conf/mybatis-config.xml");
 			//환경설정 파일 읽은 것을 기반으로 sql 세션 생성
-			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -40,8 +39,8 @@ public class MemberDAO {
 	}
 	
 	public MemberDTO memberLogin(String id, String pwd) {
-		Map<String, String> map = new HashMap<String, String>();
 		SqlSession sqlSession = sqlSessionFactory.openSession();
+		Map<String, String> map = new HashMap<String, String>();
 
 		map.put("id", id);
 		map.put("pwd", pwd);
@@ -52,8 +51,11 @@ public class MemberDAO {
 	
 	public MemberDTO memberUpdateForm(String id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		MemberDTO memberDTO = sqlSession.selectOne("memberSQL.memberLogin", id);
+		MemberDTO memberDTO = sqlSession.selectOne("memberSQL.memberUpdateForm", id);
 		sqlSession.close();
+		System.out.println(memberDTO.getPhone1());
+		System.out.println(memberDTO.getPhone2());
+		System.out.println(memberDTO.getPhone3());
 		return memberDTO;
 	}
 	

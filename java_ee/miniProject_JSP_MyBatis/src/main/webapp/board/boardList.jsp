@@ -15,16 +15,12 @@
 	int endNum = pg*5;
 	int startNum = endNum-4;
 	
-	//검색
-	String searchBy = request.getParameter("searchBy");
-	String search = request.getParameter("search");
-	if (searchBy != null) {
-		boardDAO.search(searchBy, search);
-	}
-	
 	//DB
 	BoardDAO boardDAO = BoardDAO.getInstance();
+	String searchBy = request.getParameter("searchBy");
+	String search = request.getParameter("search");
 	List<BoardDTO> list = boardDAO.boardList(startNum, endNum);
+	
 	int totalA = boardDAO.getTotalA();
 	int totalP = (totalA + 4) / 5;
 	
