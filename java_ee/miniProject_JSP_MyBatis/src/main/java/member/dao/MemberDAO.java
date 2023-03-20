@@ -53,9 +53,6 @@ public class MemberDAO {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		MemberDTO memberDTO = sqlSession.selectOne("memberSQL.memberUpdateForm", id);
 		sqlSession.close();
-		System.out.println(memberDTO.getPhone1());
-		System.out.println(memberDTO.getPhone2());
-		System.out.println(memberDTO.getPhone3());
 		return memberDTO;
 	}
 	

@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="memberUpdate" parameterType="member">
 		UPDATE MEMBER
 		SET NAME=#{name}, PWD=#{pwd}, GENDER=#{gender}, EMAIL1=#{email1}, EMAIL2=#{email2},
-			TEL1=#{tel1}, TEL2=#{tel2}, TEL3=#{tel3}, ZIPCODE=#{zipcode}, ADDR1=#{addr1}, ADDR2=#{addr2}
+			PHONE1=#{phone1}, PHONE2=#{phone2}, PHONE3=#{phone3}, ZIPCODE=#{zipcode}, ADDR1=#{addr1}, ADDR2=#{addr2}
 		WHERE ID=#{id}
 	</update>
 	
