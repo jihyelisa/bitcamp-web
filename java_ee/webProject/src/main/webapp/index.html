@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dream Jeju</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+	<header>
+		<h1 class="main-logo">Dream Jeju</h1>
+		
+		<nav class="main-nav">
+			<div class="drop">
+				<a href="#">단체 여행&#9662;</a>
+				<div class="drop-menu">
+					<p>회사 연수</p>
+					<p>수학 여행</p>
+				</div>
+			</div>
+			<div class="drop">
+				<a href="#">맞춤 여행&#9662;</a>
+				<div class="drop-menu">
+					<p>4.3 평화 기행</p>
+					<p>곶자왈 체험</p>
+					<p>힐링 워크샵</p>
+				</div>
+			</div>
+			<a href="#">갤러리</a>
+			<a href="#">문의하기</a>
+		</nav>
+	</header>
+	
+	<div class="slideshow">
+		<img id="slideshow-img" src="images/photo-1.jpg"/>
+		<img id="slideshow-img" src="images/photo-2.jpg"/>
+		<img id="slideshow-img" src="images/photo-3.jpg"/>
+		<img id="slideshow-img" src="images/photo-1.jpg"/>
+	</div>
+	
+	<div class="content-wrapper">
+		<div class="menu">
+			<div class="menu-buttons">
+				<button id="notice-button" class="clicked">공지사항</button>
+				<button id="gallery-button">갤러리</button>
+			</div>
+			
+			<div id="notice" class="notice">
+				<ul>
+					<li>사무실을 이전했습니다</li>
+					<li>[참가 모집] 카약 체험에 초대합니다.</li>
+					<li>[참가 모집] 여름 방학 기간, 오름 체험단을 모집합니다.</li>
+					<li>겨울, 추천 여행지</li>
+					<li>가을, 추천 여행지</li>
+				</ul>
+			</div>
+			<div id="gallery" class="gallery">
+				<img src="images/img-1.jpg"/>
+				<img src="images/img-2.jpg"/>
+				<img src="images/img-3.jpg"/>
+				<img src="images/img-1.jpg"/>
+				<img src="images/img-2.jpg"/>
+				<img src="images/img-3.jpg"/>
+			</div>
+		</div>
+		
+		<div class="others">
+			<div class="others-item">
+				<img src="images/icon-1.jpg"/>
+				<p>평화기행</p>
+			</div>
+			<div class="others-item">
+				<img src="images/icon-2.jpg"/>
+				<p>힐링 워크샵</p>
+			</div>
+			<div class="others-item">
+				<img src="images/icon-3.jpg"/>
+				<p>문의하기</p>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="info">
+			<a>회사 소개</a>
+			<a>개인정보처리방침</a>
+			<a>여행약관</a>
+			<a>사이트맵</a>
+			<p>제주특별자치도 ***동 ***로 *** (대표전화) 123-456-7890</p>
+		</div>
+		<div class="social-icons">
+			<img src="images/sns-1.png"/>
+			<img src="images/sns-2.png"/>
+			<img src="images/sns-3.png"/>
+		</div>
+	</footer>
+</div>
+
+
+<script>
+	const noticeButton = document.getElementById("notice-button");
+	const galleryButton = document.getElementById("gallery-button");
+	var notice = document.getElementById("notice");
+	var gallery = document.getElementById("gallery");
+	
+	noticeButton.addEventListener("click", function() {
+		this.classList.add("clicked");
+		galleryButton.classList.remove("clicked");
+		notice.style.display = "block";
+		gallery.style.display = "none";
+	});
+	
+	galleryButton.addEventListener("click", function() {
+		this.classList.add("clicked");
+		noticeButton.classList.remove("clicked");
+		gallery.style.display = "block";
+		notice.style.display = "none";
+	});
+</script>
+
+</body>
+</html>
