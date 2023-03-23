@@ -14,18 +14,16 @@ public class CheckIdService implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) {
 		
 		//Data
-		MemberDAO memberDAO = MemberDAO.getInstance();
 		String id = request.getParameter("id");
+
+		//DB
+		MemberDAO memberDAO = MemberDAO.getInstance();
 		boolean existId = memberDAO.checkId(id);
 		
 		//세션 생성
 		request.setAttribute("id", id);
 		
-		if (existId) {
-			return "/member/checkIdFail.jsp";
-		}
-		else {
-			return "/member/checkIdOk.jsp";
-		}
+		if (existId) return "/member/checkIdFail.jsp";
+		else return "/member/checkIdOk.jsp";
 	}
 }
