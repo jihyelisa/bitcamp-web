@@ -87,8 +87,6 @@
 		margin: 4px 200px;
   		cursor: pointer;
 	}
-	.searchForm {
-		}
 </style>
 </head>
 
@@ -120,7 +118,7 @@
 		<td>${ boardDTO.name }</td>
 		<td>${ boardDTO.hit }</td>
 		<td>
-			<%=new SimpleDateFormat("yyyy.MM.dd").format(boardDTO.getLogtime())%>
+			<fmt:formatDate value="${ boardDTO.logtime }" pattern="yyyy.MM.dd"/>
 		</td>
 	</tr>
 </c:forEach>
@@ -131,7 +129,7 @@
 <!-- 페이징 출력 클래스 -->
 ${ boardPaging.getPagingHTML() }
 
-<input type="button" class="main" value="← main" onclick="location.href='../index.jsp'">
+<input type="button" class="main" value="← main" onclick="location.href='http://localhost:8080/mvcMember/index.jsp'">
 </form>
 
 <form class="searchForm" method="get" action="boardList.jsp">
@@ -146,11 +144,11 @@ ${ boardPaging.getPagingHTML() }
 
 <script type="text/javascript">
 function boardPaging(pg) {
-	location.href="boardList.jsp?pg=" + pg;
+	location.href="boardList.do?pg=" + pg;
 }
 function loginFirst() {
 	alert("먼저 로그인하세요");
-	location.href="../member/loginForm.jsp";
+	location.href="http://localhost:8080/mvcMember/member/loginForm.do";
 }
 </script>
 </body>

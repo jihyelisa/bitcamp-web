@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="boardList" parameterType="java.util.Map" resultType="board">
-		SELECT * 
+		SELECT *
 		FROM (SELECT ROWNUM RN, AA.* 
 			  FROM (SELECT *
 			  		FROM BOARD ORDER BY REF DESC, STEP ASC) AA)

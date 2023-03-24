@@ -39,13 +39,10 @@ public class BoardListService implements CommandProcess {
 		boardPaging.setTotalA(totalA);
 		
 		boardPaging.makePagingHTML();
-		
-		
-		
-		
-		
-		
-		return null;
-	}
 
+		request.setAttribute("list", list);
+		request.setAttribute("boardPaging", boardPaging);
+		
+		return "/board/boardList.jsp";
+	}
 }

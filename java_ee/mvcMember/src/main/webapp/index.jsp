@@ -32,7 +32,7 @@
 	<a href="./member/deleteForm.do">회원탈퇴</a><br><br>
 	<a href="http://localhost:8080/mvcBoard/board/boardWriteForm.do">글쓰기</a><br><br>
 <% } %>
-	<a href="./board/boardList.do?pg=1">목록</a><br>
+	<a href="http://localhost:8080/mvcBoard/board/boardList.do?pg=1">목록</a><br>
 </h3>
 </div>
 </body>
