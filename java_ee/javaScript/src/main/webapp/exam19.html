@@ -19,5 +19,13 @@
 <h1 id="myid">Isn't it fun?</h1>
 <a href="#" onclick="doPoint()">자바스크립트 함수 호출하기</a>
 
+<script type="text/javascript">
+function doPoint() {
+	//가장 먼저 만나는 id만 인식한다. 중복 id를 인식하지 못한다.
+	//여러개 사용할 때는 class를 사용해야 한다.
+	document.getElementById("myid").innerHTML = "스크립트가 실행되었습니다.";
+}
+</script>
+
 </body>
 </html>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,13 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>로그아웃 되었습니다.</h3>
-
-<script type="text/javascript">
-window.onload=function() {
-	alert("로그아웃")
-	location.href="../index.jsp"
-}
-</script>
+<!-- 하는 역할은 없지만 포워딩을 위해 jsp 파일을 거치긴 해야 함 -->
 </body>
 </html>

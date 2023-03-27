@@ -20,7 +20,7 @@ public class CheckIdService implements CommandProcess {
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		boolean existId = memberDAO.checkId(id);
 		
-		//세션 생성
+		//세션
 		request.setAttribute("id", id);
 		
 		if (existId) return "/member/checkIdFail.jsp";

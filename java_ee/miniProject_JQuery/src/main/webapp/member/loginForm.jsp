@@ -46,7 +46,7 @@ th {
 <body>
 	<h2><i>You already have your account?</i></h2>
 	
-	<form name="loginForm" method="post" action="/miniProject_JQuery/member/login.do">
+	<form name="loginForm" id="loginForm">
 		<table>
 			<tr>
 				<th>아이디</th>
@@ -64,11 +64,15 @@ th {
 			</tr>
 		</table>
 		
-		<button type="button" style="margin-left:96px; margin-right:32px;" onclick="checkLogin()">로그인</button>
+		<button type="button" id="loginBtn" style="margin-left:96px; margin-right:32px;">로그인</button>
 		<input type="button" value="회원가입" onclick="location.href='writeForm.do'">
+		
+		<div id="loginResult"></div>
 	</form>
-	
+
+<!--
 <script type="text/javascript">
+/* 
 function checkLogin() {
 	document.getElementById("idDiv").innerText = "";
 	document.getElementById("pwdDiv").innerText = "";
@@ -81,4 +85,48 @@ function checkLogin() {
 		document.loginForm.submit();
 	}
 }
+-->
+<script type="text/javascript" src="../js/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+$('#loginBtn').click(function() {
+	$('#idDiv').empty();
+	$('#pwdDiv').empty();
+	
+	if($('#id').val() == '') {
+		$('#idDiv').text('아이디 입력하세요');
+		$('#id').focus();
+	}
+	else if($('#pwd').val() == '') {
+		$('#pwdDiv').text('비밀번호 입력하세요');
+		$('#pwd').focus();
+	}
+	else {
+		$.ajax({ //=jquery.ajax(), jquery와 ajax를 동시에 요청함(필요한 과정 처리 후 다시 원래 페이지로 돌아옴)
+		
+			type: 'post', //'get' or 'post'
+			
+			url: '/miniProject_JQuery/member/login.do', //이동할 요청주소 (form action 주소)
+			
+			data: 'id=' + $('#id').val() + '&pwd=' + $('#pwd').val(), //서버로 보낼 데이터
+			
+			dataType: 'text', //서버로부터 받는 자료형 - text, xml, html, json 중 1
+			
+			success: function(result) {
+				result = result.trim();
+				
+				if(result=='ok') location.href = '../index.jsp';
+				else if(result=='fail') {
+					$('#loginResult').text('아이디 또는 비밀번호가 맞지 않습니다.');
+					$('#loginResult').css('font-size', '12pt');
+				}
+			},
+
+			error: function(err) {
+				console.log(err); //에러날 경우 콘솔에 출력
+			}
+			
+		});
+	}
+});
+
 </script>

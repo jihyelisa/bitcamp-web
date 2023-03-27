@@ -13,7 +13,7 @@ public class LoginService implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) {
-		// 데이터
+		//데이터
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 		
@@ -21,7 +21,7 @@ public class LoginService implements CommandProcess {
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		MemberDTO memberDTO = memberDAO.memberLogin(id, pwd);
 		
-		if (memberDTO.getName()==null) {
+		if (memberDTO==null) {
 			//페이지 이동
 			return "/member/loginFail.jsp";
 		} else {

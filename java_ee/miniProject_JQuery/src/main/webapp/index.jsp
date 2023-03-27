@@ -27,7 +27,7 @@ header {
 #container {
    margin: auto;
    width: 1100px;
-   height: 500px;
+   min-height: 500px;
 }
 #container:after {
    content: '';

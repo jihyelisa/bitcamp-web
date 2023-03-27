@@ -3,7 +3,8 @@ function select() {
 	document.getElementById("email2").value = document.getElementById("email3").value;
 }
 
-
+//아이디 중복체크
+/*
 var checked = "";
 
 function checkId() {
@@ -15,7 +16,7 @@ function checkId() {
 	}
 }
 function isChecked() {checked = "";}
-
+*/
 
 //회원가입 유효성 검사
 function writeCheck() {

@@ -11,5 +11,4 @@ public class LoginFormService implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) {
 		return "/member/loginForm.jsp";
 	}
-
 }

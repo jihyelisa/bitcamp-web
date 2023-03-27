@@ -66,11 +66,11 @@
 		<tr>
 			<th>아이디</th>
 			<td>
-				<input type="text" name="id" placeholder="아이디를 입력하세요" onchange="isChecked()">
+				<input type="text" name="id" id="id" placeholder="아이디를 입력하세요">
 				<!-- 선생님 코드 -->
 				<!-- <input type="hidden"> 태그를 추가하여 중복체크를 마치면 위 input 값을 똑같이 입력 -->
 				<!-- 두 input 값이 일치하지 않으면 중복체크 경고가 뜨도록 함 -->
-				<input type="button" value="중복체크" onclick="checkId()">
+				<input type="button" id="checkIdBtn" value="중복체크">
 				<div id="idDiv"></div>
 			</td>
 		</tr>
@@ -160,8 +160,46 @@
 
 <!-- 다음 우편번호 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- 절대주소로 js파일로 이어줌 (상대주소도 사용 가능) -->
-<script type="text/javascript" src="http://localhost:8080/mvcMember/js/member.js"></script>
+<script type="text/javascript" src="http://localhost:8080/miniProject_JQuery/js/member.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<script type="text/javascript">
+$('#checkIdBtn').click(function() {
+	
+	if($('#id').val() == '') {
+		$('#idDiv').text('아이디를 입력하세요');
+		$('#id').focus();
+	}
+	else {
+		$.ajax({ //=jquery.ajax(), jquery와 ajax를 동시에 요청함(필요한 과정 처리 후 다시 원래 페이지로 돌아옴)
+		
+			type: 'post', //'get' or 'post'
+			
+			url: '/miniProject_JQuery/member/checkId.do', //이동할 요청주소 (form action 주소)
+			
+			data: 'id=' + $('#id').val(), //서버로 보낼 데이터
+			
+			dataType: 'text', //서버로부터 받는 자료형 - text, xml, html, json 중 1
+			
+			success: function(data) {
+				data = data.trim();
+				
+				if(data=='exist') {
+					$('#idDiv').text('사용 불가능');
+					$('#id').focus();
+				}
+				else if(data=='non_exist') {
+					$('#idDiv').text('사용 가능');
+					$('#idDiv').css('color', 'blue');
+				}
+			},
+
+			error: function(err) {
+				console.log(err); //에러날 경우 콘솔에 출력
+			}
+		});
+	}
+});
+</script>
 </body>
 </html>
