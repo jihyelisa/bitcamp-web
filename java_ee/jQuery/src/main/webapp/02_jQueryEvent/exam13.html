@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/event.css">
+</head>
+<body>
+<h1>this의 사용</h1>
+<div id="input">
+	<h2>단독 개체의 확인</h2>
+	<div id="singleButton">클릭하세요</div>
+	
+	<h2>복수 개체의 확인</h2>
+	<div>
+		<button class="multiButton" id="multiButton">클릭하세요</button>
+		<button class="multiButton" id="multiButton">클릭하세요</button>
+		<button class="multiButton" id="multiButton">클릭하세요</button>
+		<button class="multiButton" id="multiButton">클릭하세요</button>
+	</div>
+</div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('#singleButton').click(function() {
+		//$('#singleButton').html('Thank you!');
+		$(this).html('Thank you!'); //id로 언급할 필요 없이 이벤트가 발생한 객체 this로 대체
+	});
+
+	//id 속성으로 호출 - 첫 번째 것만 동작함
+	$('#multiButton').click(function() {
+		$('#multiButton').html('Thank you!');
+	});
+	//class 속성으로 호출 - 아무 버튼이나 누르면 전부 바뀜
+	$('.multiButton').click(function() {
+		$('.multiButton').html('Thank you!');
+	});
+	//this로 호출 - 누른 것만 바뀜
+	$('.multiButton').click(function() {
+		$(this).html('Thank you!');
+		
+		var index = $(this).index();
+		var result = index + '번째 요소를 선택하셨습니다.';
+		$(this).html(result);
+	});
+});
+</script>
+</body>
+</html>

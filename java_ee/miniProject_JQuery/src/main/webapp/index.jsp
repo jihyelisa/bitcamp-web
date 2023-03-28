@@ -8,10 +8,12 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-html, body {
+body {
+	margin: 50px;
    width: 100%;
    height: 100%;
    font-family: serif;
+   background-color: LemonChiffon;
 }
 html {
    overflow-y: scroll;
@@ -34,6 +36,12 @@ header {
    display: block;
    clear: both;
    float: none;
+}
+input {
+	padding: 6px;
+	background-color: LemonChiffon;
+	border: LemonChiffon;
+	color: hotpink;
 }
 nav {
    margin-left: 10px;
@@ -62,6 +70,7 @@ img {
 		<img src="/miniProject_JQuery/image/orange1.jpg" alt="orange"
 			 onclick="location.href='http://localhost:8080/miniProject_JQuery/index.jsp'">
 		<h1>MVC를 이용한 미니 프로젝트</h1>
+		<jsp:include page="./main/menu.jsp"></jsp:include>
 	</header>
 	
 	<div id="container">

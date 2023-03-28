@@ -29,6 +29,5 @@
 						console.log(err);
 					}
 				});
-				
 			});
 			</script>

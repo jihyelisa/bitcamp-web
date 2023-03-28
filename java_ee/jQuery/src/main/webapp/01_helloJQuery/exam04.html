@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1 id="hello"></h1>
+<p id="text">hello, jQuery</p>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	var h1 = $('#hello');
+	h1.css('color', 'red');
+	h1.html('Hello jQuery');
+	
+	//id로 태그 안의 값 가져오기
+	alert($('#text').text());
+});
+</script>
+</body>
+</html>

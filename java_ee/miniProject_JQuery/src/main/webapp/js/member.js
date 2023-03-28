@@ -3,6 +3,59 @@ function select() {
 	document.getElementById("email2").value = document.getElementById("email3").value;
 }
 
+$('#writeBtn').click(function() {
+	$('#nameDiv').empty();
+	$('#idDiv').empty();
+	$('#pwdDiv').empty();
+	$('#repwdDiv').empty();
+	
+	if($('#name').val() == '') {
+		$('#nameDiv').text('이름을 입력하세요');
+		$('#name').focus();
+	}
+	else if($('#id').val() == '') {
+		$('#idDiv').text('아이디를 입력하세요');
+		$('#id').focus();
+	}
+	else if($('#pwd').val() == '') {
+		$('#pwdDiv').text('비밀번호를 입력하세요');
+		$('#pwd').focus();
+	}
+	else if($('#pwd').val() != $('#repwd').val()) {
+		$('#repwdDiv').text('비밀번호가 일치하지 않습니다');
+		$('#repwd').focus();
+	}
+	else if($('#id').val() != $('#check').val()) {
+		$('#idDiv').text('중복체크 하십시오');
+		$('#id').focus();
+	}
+	else {
+		//다른 페이지로 이동해버림
+		//$('#writeForm').submit();
+		
+		$.ajax({
+			type: 'post',
+			url: '/miniProject_JQuery/member/write.do',
+			data: $('#writeForm').serialize(), //<form>에 입력된 데이터들을 문자열 형식으로 가져옴
+			dataType: 'text',
+			success: function(data) {
+				data = data.trim();
+				
+				if(data=='ok') {
+					alert('회원가입 성공');
+					location.href = '../index.jsp'
+				}
+				else if(data=='fail') {
+					alert('회원가입 실패');
+				}
+			},
+			error: function(err) {
+				console.log(err);
+			}
+		});
+	}
+});
+
 //아이디 중복체크
 /*
 var checked = "";
@@ -19,6 +72,7 @@ function isChecked() {checked = "";}
 */
 
 //회원가입 유효성 검사
+/*
 function writeCheck() {
 	//경고문 초기화
 	document.getElementById("nameDiv").innerText = "";
@@ -49,6 +103,7 @@ function writeCheck() {
 		document.writeForm.submit();
 	}
 }
+*/
 
 
 //회원정보 수정 유효성 검사

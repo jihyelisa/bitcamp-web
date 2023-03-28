@@ -52,13 +52,13 @@
 
 <h3><i>Join Us</i></h3>
 
-<form name="writeForm" method="post" action="write.do">
+<form name="writeForm" id="writeForm" method="post" action="write.do">
 
 	<table border="1" cellpadding="10" cellspacing="0">
 		<tr>
 			<th>이름</th>
 			<td>
-				<input type="text" name="name" placeholder="이름을 입력하세요">
+				<input type="text" name="name" id="name" placeholder="이름을 입력하세요">
 				<div id="nameDiv"></div>
 			</td>
 		</tr>
@@ -70,7 +70,7 @@
 				<!-- 선생님 코드 -->
 				<!-- <input type="hidden"> 태그를 추가하여 중복체크를 마치면 위 input 값을 똑같이 입력 -->
 				<!-- 두 input 값이 일치하지 않으면 중복체크 경고가 뜨도록 함 -->
-				<input type="button" id="checkIdBtn" value="중복체크">
+				<input type="hidden" id="check" value="">
 				<div id="idDiv"></div>
 			</td>
 		</tr>
@@ -78,7 +78,7 @@
 		<tr>
 			<th>비밀번호</th>
 			<td>
-				<input type="password" name="pwd" style="width: 320px;">
+				<input type="password" name="pwd" id="pwd" style="width: 320px;">
 				<div id="pwdDiv"></div>
 			</td>
 		</tr>
@@ -86,7 +86,7 @@
 		<tr>
 			<th>비밀번호 확인</th>
 			<td>
-				<input type="password" name="repwd" style="width: 320px;">
+				<input type="password" name="repwd" id="repwd" style="width: 320px;">
 				<div id="repwdDiv"></div>
 			</td>
 		</tr>
@@ -150,7 +150,7 @@
 		
 		<tr>
 			<td colspan="2" align="center">
-				<input type="button" value="가입하기" onclick="writeCheck()" class="select">
+				<input type="button" value="가입하기" id="writeBtn" class="select">
 				<input type="reset" value="다시작성" name="reset" class="select">
 				<input type='button' value='로그인' onclick="location.href='loginForm.do'" class="select">
 			</td>
@@ -162,13 +162,10 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="http://localhost:8080/miniProject_JQuery/js/member.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
 <script type="text/javascript">
-$('#checkIdBtn').click(function() {
-	
+$('#id').focusout(function() {
 	if($('#id').val() == '') {
 		$('#idDiv').text('아이디를 입력하세요');
-		$('#id').focus();
 	}
 	else {
 		$.ajax({ //=jquery.ajax(), jquery와 ajax를 동시에 요청함(필요한 과정 처리 후 다시 원래 페이지로 돌아옴)
@@ -185,12 +182,14 @@ $('#checkIdBtn').click(function() {
 				data = data.trim();
 				
 				if(data=='exist') {
-					$('#idDiv').text('사용 불가능');
+					$('#idDiv').html('<span style="color:blue;">이미 사용중인 아이디입니다.</span>');
 					$('#id').focus();
 				}
 				else if(data=='non_exist') {
-					$('#idDiv').text('사용 가능');
-					$('#idDiv').css('color', 'blue');
+					$('#idDiv').text('사용 가능한 아이디입니다.');
+					
+					//중복체크 확인용
+					$('#check').val($('#id').val());
 				}
 			},
 
