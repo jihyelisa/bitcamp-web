@@ -90,9 +90,11 @@
 </head>
 
 <body>
+<input type="hidden" id="pg" value="${ pg }">
+
 <h3><i>LIST</i></h3>
 <form name="boardList">
-<table border="1" cellpadding="10" cellspacing="0" rules="rows">
+<table id="boardListTable" border="1" cellpadding="10" cellspacing="0" rules="rows">
 	<tr>
 		<th>글번호</th>
 		<th>제목</th>
@@ -101,6 +103,8 @@
 		<th>작성일</th>
 	</tr>
 
+<!-- jQuery로 동적 처리 -->
+<%--
 <c:forEach var="boardDTO" items="${ list }">
 	<tr>
 		<td>${ boardDTO.seq }</td>
@@ -121,17 +125,11 @@
 		</td>
 	</tr>
 </c:forEach>
-	
+--%>
 </table>
-<br>
-
-<!-- 페이징 출력 클래스 -->
-${ boardPaging.getPagingHTML() }
-
-<input type="button" class="main" value="← main" onclick="location.href='http://localhost:8080/mvcMember/index.jsp'">
 </form>
 
-<form class="searchForm" method="get" action="boardList.do">
+<form class="searchForm">
 <select name="searchBy">
 	<option value="name">작성자</option>
 	<option value="subject">제목</option>
@@ -141,13 +139,11 @@ ${ boardPaging.getPagingHTML() }
 <input type="submit" value="검색">
 </form>
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="../js/boardList.js"></script>
 <script type="text/javascript">
 function boardPaging(pg) {
 	location.href="boardList.do?pg=" + pg;
-}
-function loginFirst() {
-	alert("먼저 로그인하세요");
-	location.href="http://localhost:8080/mvcMember/member/loginForm.do";
 }
 </script>
 </body>

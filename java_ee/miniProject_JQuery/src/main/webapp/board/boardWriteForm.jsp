@@ -83,6 +83,10 @@ $('#boardWriteBtn').click(function() {
 			type: 'post',
 			url: '/miniProject_JQuery/board/boardWrite.do',
 			data: $('#boardWriteForm').serialize(), //<form>에 입력된 데이터들을 문자열 형식으로 가져옴
+				  //다른 방법
+				  //jQuery //'subject=' + $('#subject').val() + '&content=' + $('#content').val()
+				  //json //{'subject':$('#subject').val(), 'content':$('#content').val()}
+			
 			dataType: 'text',
 			success: function(data) {
 				data = data.trim();

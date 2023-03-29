@@ -34,7 +34,32 @@ $("요소").attr({
 .prop("속성이름", "값")   → 속성값을 추가한다
 -->
 
+<p><a href="#">Link</a></p>
 
+<input type="checkbox" name="" id="check" checked="checked">체크박스
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	console.log('attr = ' + $('a').attr('href'));
+	console.log('prop = ' + $('a').prop('href'));
+	console.log();
+	
+	var check = $('#check');
+	console.log('check = ' + check);
+	console.log('attr = ' + check.attr('checked'));
+	console.log('prop = ' + check.prop('checked'));
+	
+	var check2 = document.querySelector('#check');
+	console.log('attr = ' + check2.getAttribute('checked'));
+	
+	/*
+	.hasAttribute(name) —> 속성의 존재 확인
+	.getAttribute(name) — 속성값을 가져온다
+	.setAttribute(name, value) — 속성값을 변경
+	.removeAttribute(name) — 속성값을 제거
+	*/
+});
+</script>
 </body>
 </html>

@@ -4,9 +4,9 @@
 			<div>
 				<c:if test="${ sessionScope.memId == null }">
 					<input type="button" value="로그인"
-						   onclick="location.href='member/loginForm.do'">
+						   onclick="location.href='/miniProject_JQuery/member/loginForm.do'">
 					<input type="button" value="회원가입"
-						   onclick="location.href='member/writeForm.do'">
+						   onclick="location.href='/miniProject_JQuery/member/writeForm.do'">
 				</c:if>
 				<c:if test="${ memId != null }">
 					<h3>${ memId }님 로그인</h3>

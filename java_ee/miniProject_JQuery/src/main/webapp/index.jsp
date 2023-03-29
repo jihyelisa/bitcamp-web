@@ -8,11 +8,17 @@
 <title>Insert title here</title>
 
 <style type="text/css">
+@font-face {
+    font-family: 'BookkMyungjo-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Bd.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
 body {
 	margin: 50px;
    width: 100%;
    height: 100%;
-   font-family: serif;
+   font-family: 'BookkMyungjo-Bd', serif !important;
    background-color: LemonChiffon;
 }
 html {
@@ -82,7 +88,7 @@ img {
 				<c:if test="${ empty display }">
 					오렌지 ....<br>
 					오렌지 사세요..<br>
-					신선해요...<br>
+					신선해요...<br><br>
 					<img src="/miniProject_JQuery/image/orange2.jpg">
 				</c:if>
 				<c:if test="${ not empty display }">
