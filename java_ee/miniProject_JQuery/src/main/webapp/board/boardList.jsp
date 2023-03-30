@@ -91,6 +91,7 @@
 
 <body>
 <input type="hidden" id="pg" value="${ pg }">
+<input type="hidden" id="memId" value="${ memId }">
 
 <h3><i>LIST</i></h3>
 <form name="boardList">
@@ -128,6 +129,8 @@
 --%>
 </table>
 </form>
+
+<div id="boardPagingDiv"></div>
 
 <form class="searchForm">
 <select name="searchBy">

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -31,7 +32,20 @@ public class GetBoardListService implements CommandProcess {
 		String search = request.getParameter("search");
 		List<BoardDTO> list = boardDAO.boardList(startNum, endNum);
 		
-		//List 객체를 json으로 변환해 보내야 함
+		//Pagination
+		int totalA = boardDAO.getTotalA();
+		
+		BoardPaging boardPaging = new BoardPaging();
+		boardPaging.setCurrentPage(pg);
+		boardPaging.setPageBlock(3);
+		boardPaging.setPageSize(5);
+		boardPaging.setCurrentPage(pg);
+		boardPaging.setTotalA(totalA);
+		
+		boardPaging.makePagingHTML();
+		
+		
+		//List, BoardPaging 객체를 json으로 변환해 보내야 함
 		//(boardList.js에서 받을 데이터 타입을 json으로 지정함)
 		JSONObject json = new JSONObject();
 		
@@ -60,7 +74,15 @@ public class GetBoardListService implements CommandProcess {
 			json.put("list", array);
 		}
 		
+		//paging json으로 전달, pagingHTML 필드가 StringBuffer이기 때문에 형변환
+		json.put("pagingHTML", boardPaging.getPagingHTML().toString());
+		
+		//글 조회 시 로그인 체크 위해 boardList.js에 아이디 전달
+		HttpSession session = request.getSession();
+		String memId = (String) session.getAttribute("memId");
+		
 		//응답
+		request.setAttribute("memId", memId); //이것도 json.put() 해서 가져가도 문제 없음
 		request.setAttribute("json", json);
 		return "/board/getBoardList.jsp";
 	}

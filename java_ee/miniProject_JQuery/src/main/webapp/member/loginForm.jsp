@@ -124,9 +124,8 @@ $('#loginBtn').click(function() {
 			error: function(err) {
 				console.log(err); //에러날 경우 콘솔에 출력
 			}
-			
 		});
 	}
 });
-
 </script>
+</body>
