@@ -23,7 +23,7 @@
 					url: '/miniProject_JQuery/member/logout.do',
 					success: function() {
 						alert("로그아웃");
-						location.href = './index.jsp';
+						location.href = '/miniProject_JQuery/index.jsp';
 					},
 					error: function(err) {
 						console.log(err);

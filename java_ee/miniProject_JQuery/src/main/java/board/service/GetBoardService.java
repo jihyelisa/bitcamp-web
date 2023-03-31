@@ -19,13 +19,16 @@ public class GetBoardService implements CommandProcess {
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		BoardDTO boardDTO = boardDAO.boardView(seq);
 		
-		//json 객체에 담기
+		//DTO 객체를 json 객체에 담기
 		JSONObject json = new JSONObject();
 		json.put("seq", seq);
 		json.put("name", boardDTO.getName());
 		json.put("subject", boardDTO.getSubject());
 		json.put("content", boardDTO.getContent());
 		json.put("hit", boardDTO.getHit());
+
+		json.put("id", boardDTO.getId());
+		System.out.println("subject = " + boardDTO.getSubject());
 
 		request.setAttribute("json", json);
 		
