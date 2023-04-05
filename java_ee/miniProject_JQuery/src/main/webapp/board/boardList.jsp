@@ -19,7 +19,6 @@
 	}
 	table {
 		width: 600px;
-		text-align: center;
 		border-collapse: collapse;
 		background-color: #EDE9D5;
 		color: #617143;
@@ -105,28 +104,6 @@
 	</tr>
 
 <!-- jQuery로 동적 처리 -->
-<%--
-<c:forEach var="boardDTO" items="${ list }">
-	<tr>
-		<td>${ boardDTO.seq }</td>
-		
-		<td>
-			<c:if test="${ requestScope.memId == null }">
-				<a class="subjectA" onclick="loginFirst()">${ boardDTO.subject }</a>
-			</c:if>
-			<c:if test="${ requestScope.memId != null }">
-				<a class="subjectA" href="boardView.jsp?seq=${ boardDTO.seq }&pg=${ pg }">${ boardDTO.subject }</a>
-			</c:if>
-		</td>
-		
-		<td>${ boardDTO.name }</td>
-		<td>${ boardDTO.hit }</td>
-		<td>
-			<fmt:formatDate value="${ boardDTO.logtime }" pattern="yyyy.MM.dd"/>
-		</td>
-	</tr>
-</c:forEach>
---%>
 </table>
 </form>
 

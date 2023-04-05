@@ -28,7 +28,6 @@ public class GetBoardService implements CommandProcess {
 		json.put("hit", boardDTO.getHit());
 
 		json.put("id", boardDTO.getId());
-		System.out.println("subject = " + boardDTO.getSubject());
 
 		request.setAttribute("json", json);
 		

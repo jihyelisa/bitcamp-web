@@ -16,6 +16,7 @@ public class BoardUpdateFormService implements CommandProcess {
 		request.setAttribute("seq", seq);
 		request.setAttribute("pg", pg);
 		request.setAttribute("display", "/board/boardUpdateForm.jsp");
+		
 		return "/index.jsp";
 	}
 

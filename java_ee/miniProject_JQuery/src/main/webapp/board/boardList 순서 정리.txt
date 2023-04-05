@@ -1,0 +1,21 @@
+<<<boardList>>>
+index.jsp - <jsp:include page="./main/menu.jsp">
+menu.jsp - 목록 누르면 /miniProject_JQuery/board/boardList.do?pg=1
+boardList.do
+servlet.java
+command.property - 서비스 클래스 찾아감
+boardListService.java - pg, display request등록 / index 리턴
+
+index.jsp - display 자리에 boardList.jsp?pg=1
+boardList.jsp - request의 pg를 value로 가져옴
+boardList.js - getBoardList.do로 pg 넘김
+getBoardList.do
+servlet.java
+command.property - 서비스 클래스 찾아감
+getBoardListService.java - boardDAO.boardList()로 받은 List를 JSON 형태로 담아 json 세션 등록
+getBoardList.jsp - 서비스 클래스에서 리턴 받아 이동, 세션에서 json 받아옴
+boardList.js - success에서 getBoardList.jsp 파일의 데이터 받음, html 태그에 내용 append
+
+
+<<<boardPaging>>>
+

@@ -88,4 +88,49 @@ public class BoardDAO {
 		sqlSession.close();
 		return boardDTO;
 	}
+	
+	public int boardReply(Map<String, Object> map) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+
+		//1. step update - 같은 그룹 안에서 뒤로 보낼 글 step 밀기
+		//update board set step=step+1 where ref=원글ref and step>원글step
+		BoardDTO boardDTO = sqlSession.selectOne("boardSQL.boardView", map.get("pseq"));
+		sqlSession.update("boardSQL.boardReply1", boardDTO);
+		
+		//2. insert
+		//답글ref = 원글ref
+		//답글lev = 원글lev+1
+		//답글step = 원글step+1
+		map.put("ref", boardDTO.getRef());
+		map.put("lev", boardDTO.getLev()+1);
+		map.put("step", boardDTO.getStep()+1);
+		sqlSession.update("boardSQL.boardReply2", map);
+		
+		//3. reply update - 원글에 속하는 답글수 +1
+		//update board set reply=reply+1 where seq=원글번호		
+		int su = sqlSession.insert("boardSQL.boardReply3", boardDTO.getSeq());
+		
+		sqlSession.commit();
+		sqlSession.close();
+		return su;
+	}
+	
+	public int boardUpdate(Map<String, Object> map) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		int su = sqlSession.update("boardSQL.boardUpdate", map);
+		sqlSession.commit();
+		sqlSession.close();
+		return su;
+	}
+
+	public void boardDelete(int seq) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		//1. 원글 답글수 줄이기
+		//2. 삭제글의 답글 앞에 말머리 붙이기
+		//3. 삭제
+		sqlSession.delete("boardSQL.boardDelete", seq);
+		sqlSession.commit();
+		sqlSession.close();
+	}
 }

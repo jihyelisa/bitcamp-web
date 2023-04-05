@@ -39,4 +39,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="boardView" parameterType="int" resultType="board">
 		SELECT * FROM BOARD WHERE SEQ=#{seq}
 	</select>
+	
+	<update id="boardReply1" parameterType="board">
+		UPDATE BOARD SET STEP=STEP+1 WHERE REF=#{ref} AND STEP>#{step}
+	</update>
+	
+	<insert id="boardReply2" parameterType="java.util.Map">
+		INSERT INTO BOARD
+		VALUES (SEQ_BOARD.NEXTVAL,#{id},#{name},#{email},#{subject},#{content},
+				#{ref},#{lev},#{step},#{pseq},0,0,SYSDATE)
+	</insert>
+	
+	<update id="boardReply3" parameterType="int">
+		UPDATE BOARD SET REPLY=REPLY+1 WHERE SEQ=#{pseq}
+	</update>
+	
+	<update id="boardUpdate" parameterType="map">
+		UPDATE BOARD SET SUBJECT=#{subject}, CONTENT=#{content}, LOGTIME=SYSDATE WHERE SEQ=#{seq}
+	</update>
+	
+	<delete id="boardDelete" parameterType="int">
+		begin
+			UPDATE BOARD SET REPLY=REPLY-1 WHERE SEQ = (SELECT PSEQ FROM BOARD WHERE SEQ=#{seq});
+			DELETE BOARD WHERE SEQ=#{seq};
+			UPDATE BOARD SET SUBJECT = '[원글이 삭제된 답글] ' || SUBJECT WHERE PSEQ=#{seq};
+		end;
+	</delete>
 </mapper>

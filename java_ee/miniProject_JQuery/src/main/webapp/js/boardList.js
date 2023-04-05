@@ -18,8 +18,9 @@ $(document).ready(function() {
 				})).append($('<td/>', {
 					}).append($('<a/>', { //subject는 a 태그 안에 추가
 						href: '#',
-						class: 'subjectA',
-						text: items.subject
+						class: 'subjectA subjectA_'+items.seq,
+						text: items.subject,
+						'text-align': 'left'
 				
 				}))).append($('<td/>', {
 					align: 'center',
@@ -31,6 +32,19 @@ $(document).ready(function() {
 					align: 'center',
 					text: items.logtime
 				})).appendTo($('#boardListTable')) //괄호 안 요소의 자식으로 추가
+				
+				//답글 앞 공백 추가
+				for(var i=1; i<=items.lev; i++) {
+					$('.subjectA_'+items.seq).before('&emsp;');
+				}
+				
+				//답글 화살표 아이콘 추가
+				if(items.pseq != 0) {
+					$('.subjectA_'+items.seq).before($('<img/>', {
+						'src': '/miniProject_JQuery/image/reply.gif',
+						'width': '10px'
+					}));
+				}
 			});
 			//페이징 html
 			$('#boardPagingDiv').html('<br>' + data.pagingHTML + '<br>');

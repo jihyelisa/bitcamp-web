@@ -87,7 +87,7 @@
     	display: flex;
     	gap: 10px;
     }
-    .buttons button {
+    /* .buttons button {
 		background-color: #E7AB9A;
 		border: none;
 		color: white;
@@ -97,7 +97,7 @@
 		display: inline-block;
 		font-size: 16px;
   		cursor: pointer;
-    }
+    } */
     .content {
 		overflow-y: scroll;
 		height: 200px;
@@ -138,7 +138,8 @@
 			<input type="button" value="글삭제" id="boardDeleteBtn">
 		</div>
 		
-		<input type="button" value="답글" id="">
+		<input type="button" value="답글" id="boardReplyBtn">
+		<input type="button" value="목록" id="boardListBtn">
 	</div>
 </form>
 

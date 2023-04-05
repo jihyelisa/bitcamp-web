@@ -1,6 +1,3 @@
-const subject;
-const content;
-
 //$(function() {}); - 아래처럼도 작성 가능
 $(document).ready(function() {
 	$.ajax({
@@ -9,21 +6,13 @@ $(document).ready(function() {
 		data: 'seq='+ $('#seq').val(),
 		dataType: 'json', //객체를 담아올 수 있는 자료형 없음, json 형식으로 받아야 함
 		success: function(data) {
-			subject = data.subject;
-			content = data.content;
-			$('#subject').attr('value', subject);
-			$('#content').html(content);
+			$('#subject').val(data.subject);
+			$('#content').text(data.content);
 		},
-		
 		error: function(err) {
 			console.log(err);
 		}
 	});
-});
-
-$('#boardResetBtn').click(function(){
-		$('#subject').attr('value', subject);
-		$('#content').html(content);
 });
 
 $('#boardWriteBtn').click(function() {
@@ -43,7 +32,7 @@ $('#boardWriteBtn').click(function() {
 				data = data.trim();
 				if(data=='ok') {
 					alert("게시물이 수정되었습니다.");
-					location.href = '/miniProject_JQuery/board/boardList.do?pg=' + $('#pg')
+					location.href = '/miniProject_JQuery/board/boardList.do?pg=' + $('#pg').val();
 				}
 			},
 			error: function(err) {

@@ -66,7 +66,7 @@
 		<tr>
 			<td colspan="2">
 				<input type="button" value="게시물 등록" id="boardWriteBtn" style="margin-left:150px;">
-				<input type="button" value="다시 작성" id="boardResetBtn" style="margin-left:50px;">
+				<input type="button" value="다시 작성" id="boardResetBtn" style="margin-left:50px;" onclick="location.reload()">
 			</td>
 		</tr>
 	</table>
