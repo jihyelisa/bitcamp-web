@@ -138,7 +138,7 @@ $(function(){
 		var mm = date.getMonth()+1;
 		var dd = date.getDate();
 		var hh = date.getHours();
-		var yy = date.getFullYear();
+		var mi = date.getMinutes();
 		var ss = date.getSeconds();
 
 		if(mm < 10) mm = '0' + mm;
@@ -147,7 +147,7 @@ $(function(){
 		if(mi < 10) mi = '0' + mi;
 		if(ss < 10) ss = '0' + ss;
 		
-		var today = yy + "-" + mm + "-" + dd + " " + hh + ":" + ss;
+		var today = yy + "-" + mm + "-" + dd + " " + hh + ":" + mi + ":" + ss;
 		
 		//<li class="comment_item"></li>
 		var new_li = $('<li/>');
@@ -166,11 +166,11 @@ $(function(){
 		var date_span = $('<span>');
 		date_span.html(' / ' + today + ' ');
 		
-		//<input type="button" value="삭제하기" class="delete_btn"/>
+		//<input type="button" value="삭제하기" class="delete_btn">
 		var del_input = $('<input>');
 		del_input.attr({
 			'type': 'button',
-			'value': '삭제하기'
+			'value': '삭제하기',
 		});
 		del_input.addClass('delete_btn');
 		

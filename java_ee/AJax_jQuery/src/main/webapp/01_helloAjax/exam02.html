@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h1 class="title">$.ajax() 함수를 사용한 텍스트 읽기</h1>
+<h1 class="title">$.ajax() 함수를 사용한 HTML 읽기</h1>
 <div class="exec">
 	<input type="button" value="txt파일 가져오기" id="mybtn" />
 </div>
@@ -20,15 +20,15 @@ $(function(){
 	$('#mybtn').click(function(){
 		$.ajax({
 			type: 'get', //보내는 데이터가 없으므로 get 방식이어도 상관x
-			url: '/AJax_jQuery/text/text01.txt',
+			url: '/AJax_jQuery/text/text02.txt',
 			dataType: 'text',
-			timeout: 30000,
-			cache: false,
 			success: function(data){
-				$('#result').html(data);
+				$('#result').text(data); //적혀진 그대로(코드로 인식x)
+				$('#result').html(data); //html 코드로 가져옴
+				$('#result').append(data); //#result 뒤에 더해줌
 			},
-			error: function(xhr, textStatus, errorThrown){
-				$('div').html('<div>' + textStatus + '(HTTP-' + xhr.status + '/' + errorThrown + ')' + '</div>');
+			error: function(e){
+				console.log(e);
 			}
 		});
 	});

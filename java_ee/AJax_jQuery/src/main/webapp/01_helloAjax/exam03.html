@@ -8,9 +8,9 @@
 </head>
 <body>
 
-<h1 class="title">$.ajax() 함수를 사용한 텍스트 읽기</h1>
+<h1 class="title">$.ajax() 함수를 사용한 JSP 읽기</h1>
 <div class="exec">
-	<input type="button" value="txt파일 가져오기" id="mybtn" />
+	<input type="button" value="JSP파일 가져오기" id="mybtn" />
 </div>
 <div class="console" id="result"></div>
 
@@ -20,15 +20,14 @@ $(function(){
 	$('#mybtn').click(function(){
 		$.ajax({
 			type: 'get', //보내는 데이터가 없으므로 get 방식이어도 상관x
-			url: '/AJax_jQuery/text/text01.txt',
+			url: '/AJax_jQuery/text/textdata.jsp',
+			data: 'keyword=Hello, Ajax!',
 			dataType: 'text',
-			timeout: 30000,
-			cache: false,
 			success: function(data){
 				$('#result').html(data);
 			},
-			error: function(xhr, textStatus, errorThrown){
-				$('div').html('<div>' + textStatus + '(HTTP-' + xhr.status + '/' + errorThrown + ')' + '</div>');
+			error: function(err){
+				alert(err);
 			}
 		});
 	});
