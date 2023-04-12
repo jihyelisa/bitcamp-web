@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- sample03 -->
+	<!-- 스프링 객체는 static 선언, getInstance() 하지 않아도 디폴트로 싱글톤이다 (한 번만 생성된다) -->
+	<bean id="messageBeanEn" class="sample03.MessageBeanEn"></bean>
+	<!-- scope="prototype" 하면 사용시마다 새로운 객체 생성 -->
+	<bean id="messageBeanKo" class="sample03.MessageBeanKo" scope="prototype"></bean>
+	
+	<!-- sample04 -->
+	<bean id="calcAdd" class="sample04.CalcAdd"></bean>
+	<bean id="calcMul" class="sample04.CalcMul"></bean>	
+	
+	<!-- sample05 -->
+	<bean id="sungJukImpl" class="sample05.SungJukImpl"></bean>
+</beans>
