@@ -4,6 +4,9 @@ $(function(){
 		url: '/chapter06_SpringMaven/user/getUserList',
 		dataType: 'json',
 		success: function(data){
+			console.log(JSON.stringify(data));
+			console.log(data[0].name);
+			
 			$.each(data, function(index, items){
 				$('<tr/>').append($('<td/>', {
 					align: 'center',

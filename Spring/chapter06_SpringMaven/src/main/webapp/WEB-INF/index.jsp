@@ -10,10 +10,12 @@
 
 <h3>*** 메인화면 ***</h3>
 <h4>
-	<a href="user/writeForm">입력</a>
-	<a href="user/list">출력</a>
-	<a href="">수정</a>
-	<a href="">삭제</a>
+	<p><a href="/chapter06_SpringMaven/user/writeForm">입력</a></p>
+	<p><a href="/chapter06_SpringMaven/user/list">출력</a></p>
+	<p><a href="/chapter06_SpringMaven/user/updateForm">수정</a></p>
+	<p><a href="/chapter06_SpringMaven/user/deleteForm">삭제</a></p>
+	<p><a href="/chapter06_SpringMaven/user/uploadForm">업로드</a></p>
+	<p><a href="/chapter06_SpringMaven/user/uploadForm_Ajax">업로드_Ajax</a></p>
 </h4>
 
 </body>

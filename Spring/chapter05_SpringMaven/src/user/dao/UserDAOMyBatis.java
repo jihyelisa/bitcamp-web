@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.Setter;
 import user.bean.UserDTO;
 
 @Transactional
 @Repository
 public class UserDAOMyBatis implements UserDAO {
-	@Setter
+	@Autowired
 	private SqlSession sqlSession;
 	
 	//@Transactional //commit, close 자동으로 처리

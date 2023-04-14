@@ -1,18 +1,20 @@
 package spring.conf;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.Scope;
-
-import user.bean.UserDTO;
-import user.dao.UserDAOImpl;
-import user.main.HelloSpring;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @PropertySource("classpath:spring/db.properties")
+@EnableTransactionManagement
 public class SpringConfiguration {
 	private @Value("${jdbc.driver}") String driver;
 	private @Value("${jdbc.url}") String url;
@@ -30,22 +32,39 @@ public class SpringConfiguration {
 	}
 	
 	@Bean
-	public HelloSpring helloSpring() {
-		return new HelloSpring();
+	public SqlSessionFactory sqlSessionFactory() throws Exception {
+		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		sqlSessionFactoryBean.setDataSource(dataSource());
+		sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("spring/mybatis-config.xml"));
+		sqlSessionFactoryBean.setMapperLocations(new ClassPathResource("user/dao/userMapper.xml"));
+		
+		return sqlSessionFactoryBean.getObject();
+	}
+
+	@Bean
+	public SqlSessionTemplate sqlSession() throws Exception {
+		SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory());
+		return sqlSessionTemplate;
 	}
 	
-	@Bean(name="userDTO")
-	@Scope("prototype")
-	public UserDTO userDTO() {
-		return new UserDTO();
-	}
-	@Bean(name="userDAOImpl")
-	public UserDAOImpl userDAOImpl() {
-		return new UserDAOImpl();
+	@Bean
+	public DataSourceTransactionManager transactionManager(){
+		return new DataSourceTransactionManager(dataSource());
 	}
 }
-/*
-@Bean
+/* @Bean
 - 메소드의 return 값을 bean으로 생성
 - 메소드의 이름은 반드시 bean의 id명과 같아야 한다.
 */
+
+/* mapper 파일이 여러개일 경우 작성방법
+
+1.
+sqlSessionFactoryBean.setMapperLocations(new ClassPathResource("user/dao/userMapper1.xml"),
+										 new ClassPathResource("user/dao/userMapper2.xml"),
+										 new ClassPathResource("user/dao/userMapper3.xml"));
+
+2. 필드 선언 */
+// @Autowired
+// private ApplicationContext context;
+// sqlSessionFactoryBean.setMapperLocations(context.getResources("classpath:*/dao/*Mapper.xml"));

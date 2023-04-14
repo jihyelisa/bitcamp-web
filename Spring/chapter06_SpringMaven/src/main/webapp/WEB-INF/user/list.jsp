@@ -15,7 +15,7 @@
 	</a>
 </h3>
 
-<table border="1">
+<table id="userListTable" border="1" frame="hsides" rules="rows" cellspacing="0" cellpadding="5">
 	<tr>
 		<th width="150">이름</th>
 		<th width="150">아이디</th>
@@ -25,5 +25,8 @@
 	<!-- 동적 처리 -->
 	
 </table>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="../js/list.js"></script>
 </body>
 </html>

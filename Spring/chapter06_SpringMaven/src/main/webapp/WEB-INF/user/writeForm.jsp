@@ -5,13 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#writeForm div {
+		color: red;
+		font-size: 8pt;
+		font-weight: bold;
+	}
+</style>
 </head>
 <body>
 
 <h3>
 	<a href="/chapter06_SpringMaven/">
 		<img src="/chapter06_SpringMaven/image/orange1.jpg" width="50" height="50">
-		목록
+		회원가입
 	</a>
 </h3>
 
@@ -40,7 +47,7 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<input type="submit" value="등록">
+			<input type="button" value="등록" id="writeBtn">
 			<input type="reset" value="취소">
 		</td>
 	</tr>

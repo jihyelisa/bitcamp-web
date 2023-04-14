@@ -1,5 +1,7 @@
 package user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,24 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void write(UserDTO userDTO) {
 		userDAO.write(userDTO);
+	}
+
+	@Override
+	public String isExistId(String id) {
+		UserDTO userDTO = userDAO.getUser(id);
+		if(userDTO == null)
+			return "non_exist";
+		else
+			return "exist";
+	}
+
+	@Override
+	public List<UserDTO> getUserList() {
+		return userDAO.getUserList();
+	}
+
+	@Override
+	public void update(UserDTO userDTO) {
+		userDAO.update(userDTO);
 	}
 }
