@@ -1,5 +1,13 @@
 package user.bean;
 
+import org.springframework.stereotype.Component;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Component
+@Getter
+@Setter
 public class UserPaging {
 	private int currentPage; //현재페이지
 	private int pageBlock; //[이전][1][2][3][다음]
@@ -17,18 +25,18 @@ public class UserPaging {
 		if (endPage > totalP) endPage = totalP;
 		
 		if(startPage > pageBlock) {
-			pagingHTML.append("<span id='prevNext' onclick='boardPaging(" + (startPage-1) + ")'>이전</span>");
+			pagingHTML.append("[ <span id='prevNext' onclick='userPaging(" + (startPage-1) + ")'>이전</span> ]");
 		}
 		
 		for (int i=startPage; i<=endPage; i++) {
 			if (i==currentPage) {
-				pagingHTML.append("<span id='currentPaging' onclick='boardPaging(" + i + ")'>" + i + "</span>");
+				pagingHTML.append("[ <span id='currentPaging' onclick='userPaging(" + i + ")'>" + i + "</span> ]");
 			}
-			else pagingHTML.append("<span id='paging' onclick='boardPaging(" + i + ")'>" + i + "</span>");
+			else pagingHTML.append("[ <span id='paging' onclick='userPaging(" + i + ")'>" + i + "</span> ]");
 		}
 		
 		if (endPage < totalP) {
-			pagingHTML.append("<span id='prevNext' onclick='boardPaging(" + (endPage+1) + ")'>다음</span>");
+			pagingHTML.append("[ <span id='prevNext' onclick='userPaging(" + (endPage+1) + ")'>다음</span> ]");
 		}
 	}
 }

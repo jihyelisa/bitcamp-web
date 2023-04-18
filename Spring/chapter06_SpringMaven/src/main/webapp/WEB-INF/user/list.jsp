@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<input type="text" id="pg" value="${pg}">
 
 <h3>
 	<a href="/chapter06_SpringMaven/">
@@ -26,7 +27,14 @@
 	
 </table>
 
+	<div id="userPagingDiv" style="width: 650px; text-align: center; margin-top: 3px;"></div>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src="../js/list.js"></script>
+<script type="text/javascript">
+function userPaging(pg){
+	location.href = "/chapter06_SpringMaven/user/list?pg=" + pg;
+}
+</script>
 </body>
 </html>

@@ -11,6 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getUserList" resultType="user">
 		SELECT * FROM USERTABLE
 	</select>
+
+	<!-- 총글수 -->
+	<select id="getTotalA" resultType="int">
+		SELECT COUNT(*) FROM USERTABLE
+	</select>
 	
 	<select id="getUser" parameterType="String" resultType="user">
 		SELECT * FROM USERTABLE WHERE ID=#{id}
