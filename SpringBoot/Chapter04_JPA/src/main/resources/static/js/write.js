@@ -6,7 +6,7 @@ $('#writeBtn').click(function() {
 		data: $('#writeForm').serialize(), //문자열 'name=홍길동&id=hong&pwd=111'을 전달
 		success: function() {
 			alert('등록 완료');
-			location.href='/user/list'
+			location.href='/user/list';
 		},
 		error: function(err) {
 			console.log(err);

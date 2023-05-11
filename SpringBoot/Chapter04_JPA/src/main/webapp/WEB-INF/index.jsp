@@ -7,12 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>*** 메인화면 ***</h3>
-<h4>
-	<a href="/user/writeForm">등록</a><br/>
-	<a href="/user/list">목록</a><br/>
-	<a href="">수정</a><br/>
-	<a href="">삭제</a><br/>
-</h4>
+	<img src="https://images.pexels.com/photos/14270010/pexels-photo-14270010.jpeg" onclick="location.href='/'" width="100"/>
+	<h3>*** 메인화면 ***</h3>
+	<h4>
+		<a href="/user/writeForm">등록</a><br/>
+		<a href="/user/list">목록</a><br/>
+		<a href="/user/updateForm">수정</a><br/>
+		<a href="/user/deleteForm">삭제</a><br/>
+	</h4>
 </body>
 </html>

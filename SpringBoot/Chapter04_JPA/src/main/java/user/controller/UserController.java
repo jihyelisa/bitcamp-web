@@ -1,6 +1,8 @@
 package user.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,16 @@ public class UserController {
 		return "user/list";
 	}
 	
+	@GetMapping("updateForm")
+	public String updateForm() {
+		return "user/updateForm";
+	}
+	
+	@GetMapping("deleteForm")
+	public String deleteForm() {
+		return "user/deleteForm";
+	}
+	
 	@PostMapping("write")
 	@ResponseBody
 	public void write(@ModelAttribute UserDTO userDTO) {
@@ -50,7 +62,21 @@ public class UserController {
 	
 	@PostMapping("search")
 	@ResponseBody
-	public List<UserDTO> search(@RequestParam String searchOption, String keyword) {
-		return userService.search(searchOption, keyword);
+	public List<UserDTO> search(@RequestParam Map<String, String> map) {
+		return userService.search(map);
+	}
+	
+	@PostMapping("searchById")
+	@ResponseBody
+	public Optional<UserDTO> searchById(@RequestParam String searchId) {
+		return userService.searchById(searchId);
+	}
+	
+	@PostMapping("delete")
+	@ResponseBody
+	public String delete(@RequestParam Map<String, String> map) {
+		System.out.println("컨트롤러");
+		System.out.println(map);
+		return userService.delete(map);
 	}
 }

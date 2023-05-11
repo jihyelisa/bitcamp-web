@@ -8,6 +8,8 @@
 </head>
 <body>
 	<img src="https://images.pexels.com/photos/14270010/pexels-photo-14270010.jpeg" onclick="location.href='/'" width="100"/>
+	<br/><br/>
+	
 	<table class="userList" style="border:none">
 		<tr>
 			<th width="100">이름</th>
