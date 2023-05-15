@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const arr = [10, 20, 30];
+
+            const data = [
+                { id: 1, name: "홍길동", age: 20 },
+                { id: 2, name: "프로도", age: 30 },
+                { id: 3, name: "세균맨", age: 40 },
+            ];
+
+            //React 에서는 return 이 없으면 값이 나오지 않는다. 반드시 써야 한다.
+            arr.map((item, index) => {
+                return console.log(index, item);
+            });
+
+            //처리되는 문장이 하나일 때는 {}, return 생략할 수 있다.
+
+            data.map((item, index) => {
+                return console.log(item.id, item.name, item.age);
+            });
+
+            data.map((item, index) =>
+                console.log(item.id, item.name, item.age)
+            );
+        </script>
+    </body>
+</html>
+
+<!-- 
+    map (반복문)
+    [형식]
+    배열.map((요소, 인덱스) => {
+    return 요소
+    });
+ -->

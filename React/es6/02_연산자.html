@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const a = 25;
+            const b = true;
+            const c = false;
+            const d = null;
+
+            const result = a > 30 ? "참" : "거짓";
+            console.log(result);
+
+            const result2 = b && " 참에 대한 결과입니다";
+            console.log(result2);
+
+            const result3 = c || " 거짓에 대한 결과입니다";
+            console.log(result3);
+
+            const result4 = d || " 값이 존재하지 않습니다";
+            console.log(result4);
+
+            // 문제 - 학점 매기기
+            const score = 88;
+            // let grade = score >= 90 ? 'A' : score >= 80 ? 'B' : score >= 70 ? 'C' : score >= 60 ? 'D' : 'F';
+            let grade =
+                (score >= 90 && "A") ||
+                (score >= 80 && "B") ||
+                (score >= 70 && "C") ||
+                (score >= 60 && "D") ||
+                "F";
+
+            console.log(`점수가 ${score}점이므로 ${grade}학점입니다.`);
+        </script>
+    </body>
+</html>
+
+<!--
+① React 연산자
+=== 같다
+!== 다르다
+
+② 삼항 연산자
+[형식] 
+조건 ? true 일 때 : false 일 때
+
+③ &&
+[형식]
+true && 참일 때 수행하는 결과
+
+④ ||
+[형식]
+( false, null, undefined ) || 거짓일 때 수행하는 결과
+ -->
